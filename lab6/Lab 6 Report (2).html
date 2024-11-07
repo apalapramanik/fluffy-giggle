@@ -1,0 +1,824 @@
+<div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true" style=""><h1 id="Lab-6-Report-Automating-Things-CSCE-438838" data-id="Lab-6-Report-Automating-Things-CSCE-438838"><span>Lab 6 Report: Automating Things (CSCE 438/838)</span></h1><h2 id="Group-Members" data-id="Group-Members"><span>Group Members:</span></h2><ol style="padding-left: 2em;">
+<li><span>Khalil Ahmed</span></li>
+<li><span>Apala Pramanik</span></li>
+<li><span>Raoul Nya</span></li>
+<li><span>Audrey Vazzana</span></li>
+</ol><hr><h2 id="Table-of-Contents" data-id="Table-of-Contents"><span>Table of Contents</span></h2><ol style="padding-left: 2em;">
+<li><a href="#introduction"><span>Introduction</span></a></li>
+<li><a href="#requirements"><span>Requirements</span></a></li>
+<li><a href="#development-process"><span>Development Process</span></a></li>
+<li><a href="#results"><span>Results</span></a></li>
+<li><a href="#references"><span>References</span></a></li>
+<li><a href="#appendix"><span>Appendix</span></a></li>
+</ol><hr><h2 id="Introduction" data-id="Introduction"><span>Introduction</span></h2><p><span>In this lab, the goal was to integrate Machine Learning (ML) and Azure IoT services into an end-to-end system. This system involves:</span></p><ul>
+<li><span>Building a predictive model using the </span><strong><span>Rain in Australia</span></strong><span> dataset.</span></li>
+<li><span>Creating IoT devices that interact with </span><strong><span>Azure IoT Central</span></strong><span>.</span></li>
+<li><span>Deploying an </span><strong><span>Azure Function</span></strong><span> to make decisions based on incoming data.</span></li>
+</ul><p><span>This report documents the steps taken, challenges encountered, and the final outcomes.</span></p><hr><h2 id="Requirements" data-id="Requirements"><span>Requirements</span></h2><ol style="padding-left: 2em;">
+<li><strong><span>Data Splitting:</span></strong><span> Randomly extract 5% of the dataset as a test set and train the model with the remaining 95%.</span></li>
+<li><strong><span>IoT Central Application:</span></strong><span> Create an IoT Central app with a device template and a </span><strong><span>COMMAND</span></strong><span> defined.</span></li>
+<li><strong><span>Data-Sending Device:</span></strong><span> Implement a Python-based IoT device that sends data to IoT Central using the 5% dataset.</span></li>
+<li><strong><span>Command-Listening Device:</span></strong><span> Develop another IoT Central device to listen for a </span><strong><span>COMMAND</span></strong><span> from the Azure function.</span></li>
+<li><strong><span>Azure Function:</span></strong><span> Create a function that predicts rain using the trained model and sends a command if rain is predicted.</span></li>
+</ol><hr><h2 id="Development-Process-and-Results" data-id="Development-Process-and-Results"><span>Development Process and Results</span></h2><h3 id="1-Data-Preparation-and-Model-Training" data-id="1-Data-Preparation-and-Model-Training"><span>1. Data Preparation and Model Training</span></h3><p><span>This code demonstrates the end-to-end process of preparing the </span><strong><span>Rain in Australia</span></strong><span> dataset, training a logistic regression model, and ensuring it can be saved and loaded correctly for deployment. The dataset is initially cleaned by transforming the date column into separate year, month, and day columns and by identifying categorical and numerical features. Missing categorical values are filled using the most frequent value, while numerical columns are handled by treating outliers with the IQR method and imputing missing values with the column mean. Encoding is applied to convert categorical data into numeric form for model compatibility.</span></p><pre><code class="python hljs"><span class="hljs-comment"># Split off 5% of the data for validation before processing</span>
+rain_train, rain_validation = train_test_split(rain, test_size=<span class="hljs-number">0.05</span>, random_state=<span class="hljs-number">42</span>)
+
+<span class="hljs-comment"># Save the 5% validation data into a CSV file</span>
+rain_validation.to_csv(<span class="hljs-string">'rain_validation.csv'</span>, index=<span class="hljs-literal">False</span>)
+
+<span class="hljs-comment"># Split remaining data into features (X) and target (y)</span>
+X = rain_train.drop([<span class="hljs-string">'RainTomorrow'</span>], axis=<span class="hljs-number">1</span>)
+y = rain_train[<span class="hljs-string">'RainTomorrow'</span>]
+
+<span class="hljs-comment"># Split training and test sets (from the remaining 95%)</span>
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="hljs-number">0.2</span>, random_state=<span class="hljs-number">0</span>)
+</code></pre><p><span>A key modification to this code, in accordance with the assignment requirements, is the extraction of </span><strong><span>5% of the dataset for validation</span></strong><span> before processing. This subset is saved separately in a CSV file for use later in IoT Central simulation. The remaining 95% of the data is split into training and test sets, with a standard scaler applied to prevent data leakage. A logistic regression model is trained on the scaled training data, and the model's accuracy is evaluated on the test set using metrics like accuracy score and classification report. The model is saved using </span><code>pickle</code><span> for future use in Azure IoT integration, ensuring consistency between the original and reloaded model predictions.</span></p><h3 id="2-IoT-Central-Application-Setup" data-id="2-IoT-Central-Application-Setup"><span>2. IoT Central Application Setup</span></h3><p><span>A screenshot here showing the creation of the </span><strong><span>device template</span></strong><span> with a </span><strong><span>COMMAND</span></strong><span> defined.</span></p><p><img src="https://hackmd.io/_uploads/SkvLgh0k1e.png" alt="2024-10-17_10-41" class="offline-handled error-handled" loading="lazy"></p><p><img src="https://hackmd.io/_uploads/r1ekZhCkke.png" alt="2024-10-17_10-44" class="offline-handled error-handled" loading="lazy"></p><h3 id="3-Python-Based-IoT-Device-to-Send-Data" data-id="3-Python-Based-IoT-Device-to-Send-Data"><span>3. Python-Based IoT Device to Send Data</span></h3><h4 id="Code-Explanation-Sending-Telemetry-and-Handling-Commands-with-IoT-Central" data-id="Code-Explanation-Sending-Telemetry-and-Handling-Commands-with-IoT-Central"><span>Code Explanation: Sending Telemetry and Handling Commands with IoT Central</span></h4><p><span>This code demonstrates how to connect a Python-based device to </span><strong><span>Azure IoT Central</span></strong><span>, send telemetry data from a pre-split dataset, and listen for commands from the IoT Central platform. Additionally, the code shows how a listening device can receive commands and respond.</span></p><hr><h4 id="Step-by-Step-Explanation" data-id="Step-by-Step-Explanation"><span>Step-by-Step Explanation</span></h4><h4 id="1-Importing-Required-Libraries" data-id="1-Importing-Required-Libraries"><span>1. </span><strong><span>Importing Required Libraries</span></strong></h4><p><span>The following libraries are used to manage time, load datasets, and interact with Azure IoT Central:</span></p><pre><code class="python hljs"><span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> iotc.models <span class="hljs-keyword">import</span> Command
+<span class="hljs-keyword">from</span> iotc <span class="hljs-keyword">import</span> IoTCClient, IOTCConnectType, IOTCEvents
+</code></pre><ul>
+<li><strong><code>time</code></strong><span>: Adds delays between telemetry transmissions.</span></li>
+<li><strong><code>pandas</code></strong><span>: Used to load the pre-split 5% dataset for telemetry data.</span></li>
+<li><strong><code>iotc</code></strong><span>: A library to handle device connections and events with IoT Central.</span></li>
+</ul><hr><h4 id="2-Setting-IoT-Central-Device-Credentials" data-id="2-Setting-IoT-Central-Device-Credentials"><span>2. </span><strong><span>Setting IoT Central Device Credentials</span></strong></h4><p><span>The credentials for the device include </span><strong><span>Scope ID</span></strong><span>, </span><strong><span>Device ID</span></strong><span>, and </span><strong><span>Device Key</span></strong><span>, which are used to authenticate the device with IoT Central.</span></p><pre><code class="python hljs"><span class="hljs-comment"># IoT Central device credentials</span>
+scope_id = <span class="hljs-string">'0ne00D18E8C'</span>
+device_id = <span class="hljs-string">'1oqxy244di7'</span>
+device_key = <span class="hljs-string">'m3k5AQsOKu9PRApxzXOFFEDaJSozi/CeG7dSEIQPnww='</span>
+</code></pre><hr><h4 id="3-Loading-the-5-Validation-Dataset" data-id="3-Loading-the-5-Validation-Dataset"><span>3. </span><strong><span>Loading the 5% Validation Dataset</span></strong></h4><p><span>This dataset, saved as </span><code>rain_validation.csv</code><span>, contains weather observations that will be sent as telemetry data.</span></p><pre><code class="python hljs"><span class="hljs-comment"># Load the 5% split dataset (rain_validation.csv)</span>
+rain_validation = pd.read_csv(<span class="hljs-string">"rain_validation.csv"</span>)
+</code></pre><hr><h4 id="4-Defining-a-Function-to-Handle-Incoming-Commands" data-id="4-Defining-a-Function-to-Handle-Incoming-Commands"><span>4. </span><strong><span>Defining a Function to Handle Incoming Commands</span></strong></h4><p><span>This function prints the name of any incoming command from IoT Central and sends a reply to confirm receipt.</span></p><pre><code class="python hljs"><span class="hljs-comment"># Function to handle incoming commands</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">on_commands</span>(<span class="hljs-params">command: Command</span>):
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f"<span class="hljs-subst">{command.name}</span> command was sent"</span>)
+    command.reply()
+</code></pre><hr><h4 id="5-Establishing-Connection-to-IoT-Central" data-id="5-Establishing-Connection-to-IoT-Central"><span>5. </span><strong><span>Establishing Connection to IoT Central</span></strong></h4><p><span>The </span><code>IoTCClient</code><span> object is initialized with the device's credentials, and a connection is established. We also register the </span><strong><code>on_commands</code></strong><span> handler to listen for commands.</span></p><pre><code class="python hljs"><span class="hljs-comment"># Connect to IoT Central</span>
+iotc = IoTCClient(
+    device_id,
+    scope_id,
+    IOTCConnectType.IOTC_CONNECT_DEVICE_KEY,
+    device_key
+)
+
+iotc.connect()
+iotc.on(IOTCEvents.IOTC_COMMAND, on_commands)
+</code></pre><hr><h4 id="6-Sending-Telemetry-Data-to-IoT-Central" data-id="6-Sending-Telemetry-Data-to-IoT-Central"><span>6. </span><strong><span>Sending Telemetry Data to IoT Central</span></strong></h4><p><span>The code iterates over each row in the </span><strong><span>5% split dataset</span></strong><span>, formats the data as a dictionary, and sends it to IoT Central as telemetry. A short delay is added between transmissions.</span></p><pre><code class="python hljs"><span class="hljs-comment"># Sending telemetry data from the 5% split dataset</span>
+<span class="hljs-keyword">for</span> index, row <span class="hljs-keyword">in</span> rain_validation.iterrows():
+    <span class="hljs-keyword">if</span> iotc.is_connected():
+        TEL = {
+            <span class="hljs-string">'Location'</span>: row[<span class="hljs-string">'Location'</span>],
+            <span class="hljs-string">'MinTemp'</span>: row[<span class="hljs-string">'MinTemp'</span>],
+            <span class="hljs-string">'MaxTemp'</span>: row[<span class="hljs-string">'MaxTemp'</span>],
+            <span class="hljs-string">'Rainfall'</span>: row[<span class="hljs-string">'Rainfall'</span>],
+            <span class="hljs-string">'Evaporation'</span>: row[<span class="hljs-string">'Evaporation'</span>],
+            <span class="hljs-string">'Sunshine'</span>: row[<span class="hljs-string">'Sunshine'</span>],
+            <span class="hljs-string">'WindGustDir'</span>: row[<span class="hljs-string">'WindGustDir'</span>],
+            <span class="hljs-string">'WindGustSpeed'</span>: row[<span class="hljs-string">'WindGustSpeed'</span>],
+            <span class="hljs-string">'WindDir9am'</span>: row[<span class="hljs-string">'WindDir9am'</span>],
+            <span class="hljs-string">'WindDir3pm'</span>: row[<span class="hljs-string">'WindDir3pm'</span>],
+            <span class="hljs-string">'WindSpeed9am'</span>: row[<span class="hljs-string">'WindSpeed9am'</span>],
+            <span class="hljs-string">'WindSpeed3pm'</span>: row[<span class="hljs-string">'WindSpeed3pm'</span>],
+            <span class="hljs-string">'Humidity9am'</span>: row[<span class="hljs-string">'Humidity9am'</span>],
+            <span class="hljs-string">'Humidity3pm'</span>: row[<span class="hljs-string">'Humidity3pm'</span>],
+            <span class="hljs-string">'Pressure9am'</span>: row[<span class="hljs-string">'Pressure9am'</span>],
+            <span class="hljs-string">'Pressure3pm'</span>: row[<span class="hljs-string">'Pressure3pm'</span>],
+            <span class="hljs-string">'Cloud9am'</span>: row[<span class="hljs-string">'Cloud9am'</span>],
+            <span class="hljs-string">'Cloud3pm'</span>: row[<span class="hljs-string">'Cloud3pm'</span>],
+            <span class="hljs-string">'Temp9am'</span>: row[<span class="hljs-string">'Temp9am'</span>],
+            <span class="hljs-string">'Temp3pm'</span>: row[<span class="hljs-string">'Temp3pm'</span>],
+            <span class="hljs-string">'RainToday'</span>: row[<span class="hljs-string">'RainToday'</span>]
+        }
+        
+        <span class="hljs-comment"># Send telemetry to IoT Central</span>
+        iotc.send_telemetry(TEL)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f"Telemetry sent: <span class="hljs-subst">{TEL}</span>"</span>)
+        
+        <span class="hljs-comment"># Sleep for a short duration before sending the next row of data</span>
+        time.sleep(<span class="hljs-number">10</span>)  <span class="hljs-comment"># Adjust as needed</span>
+</code></pre><hr><h4 id="Explanation-Summary" data-id="Explanation-Summary"><span>Explanation Summary</span></h4><p><span>This code establishes a connection between a Python-based IoT device and Azure IoT Central. The device sends weather telemetry data from a 5% validation dataset and listens for incoming commands from IoT Central. If a command is received, it prints the command name and sends a confirmation reply.</span></p><h4 id="TELEMETRY-DATA-SENT-TO-IOT-CENTRAL" data-id="TELEMETRY-DATA-SENT-TO-IOT-CENTRAL"><span>TELEMETRY DATA SENT TO IOT CENTRAL</span></h4><p><img src="https://hackmd.io/_uploads/B1dK-3CJyl.png" alt="ss5" class="offline-handled error-handled" loading="lazy"></p><h4 id="TELEMETRY-DATA-RECEIVED-AT-IOT-CENTRAL" data-id="TELEMETRY-DATA-RECEIVED-AT-IOT-CENTRAL"><span>TELEMETRY DATA RECEIVED AT IOT CENTRAL</span></h4><p><img src="https://hackmd.io/_uploads/B19uZnCyke.png" alt="receiving_telemetry_data" class="offline-handled error-handled" loading="lazy"></p><h3 id="4-Command-Listening-Device" data-id="4-Command-Listening-Device"><span>4. Command-Listening Device</span></h3><h4 id="LISTENING-DEVICE-CREATED" data-id="LISTENING-DEVICE-CREATED"><span>LISTENING DEVICE CREATED</span></h4><p><img src="https://hackmd.io/_uploads/Hya4fnCyJg.png" alt="2024-10-17_10-49" class="offline-handled error-handled" loading="lazy"></p><h4 id="LISTENING-DEVICE-TEMPLATE" data-id="LISTENING-DEVICE-TEMPLATE"><span>LISTENING DEVICE TEMPLATE</span></h4><p><img src="https://hackmd.io/_uploads/r1BIz2RkJg.png" alt="2024-10-17_10-50" class="offline-handled error-handled" loading="lazy"></p><h3 id="5-Azure-Function-to-Process-Data-and-Send-Commands" data-id="5-Azure-Function-to-Process-Data-and-Send-Commands"><span>5. Azure Function to Process Data and Send Commands</span></h3><h4 id="Code-Explanation-Azure-Function-for-Weather-Prediction-and-Device-Command" data-id="Code-Explanation-Azure-Function-for-Weather-Prediction-and-Device-Command"><span>Code Explanation: Azure Function for Weather Prediction and Device Command</span></h4><p><span>This code defines an </span><strong><span>Azure Function</span></strong><span> that loads a pre-trained machine learning model, processes incoming HTTP requests, makes weather predictions, and sends commands to a listening device if rain is predicted. It showcases the integration of Azure Functions with machine learning and IoT Central through RESTful APIs.</span></p><hr><h4 id="Step-by-Step-Explanation25" data-id="Step-by-Step-Explanation"><span>Step-by-Step Explanation</span></h4><h4 id="1-Importing-Required-Libraries26" data-id="1-Importing-Required-Libraries"><span>1. </span><strong><span>Importing Required Libraries</span></strong></h4><p><span>The necessary libraries for Azure Functions, machine learning model loading, logging, and HTTP requests are imported.</span></p><pre><code class="python hljs"><span class="hljs-keyword">import</span> azure.functions <span class="hljs-keyword">as</span> func
+<span class="hljs-keyword">import</span> joblib
+<span class="hljs-keyword">import</span> logging
+<span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">import</span> requests
+</code></pre><ul>
+<li><strong><code>azure.functions</code></strong><span>: Used to create Azure Functions and handle HTTP requests.</span></li>
+<li><strong><code>joblib</code></strong><span>: Loads the pre-trained machine learning model from disk.</span></li>
+<li><strong><code>logging</code></strong><span>: Logs important information, warnings, and errors for monitoring.</span></li>
+<li><strong><code>json</code></strong><span>: Handles JSON data formats for API requests.</span></li>
+<li><strong><code>requests</code></strong><span>: Sends HTTP POST requests to the listening IoT device.</span></li>
+</ul><hr><h4 id="2-Initializing-the-Azure-Function-App-and-Loading-the-Model" data-id="2-Initializing-the-Azure-Function-App-and-Loading-the-Model"><span>2. </span><strong><span>Initializing the Azure Function App and Loading the Model</span></strong></h4><p><span>The function app is configured with </span><strong><span>function-level authorization</span></strong><span> for secured access. The machine learning model, previously trained and saved, is loaded using </span><code>joblib</code><span>.</span></p><pre><code class="python hljs">app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
+
+<span class="hljs-comment"># Load the pre-trained model</span>
+model = joblib.load(<span class="hljs-string">'iot_model_ap'</span>)
+</code></pre><hr><h4 id="3-Creating-the-HTTP-Trigger-Function" data-id="3-Creating-the-HTTP-Trigger-Function"><span>3. </span><strong><span>Creating the HTTP Trigger Function</span></strong></h4><p><span>The </span><code>http_trigger_lab6</code><span> function is triggered by an HTTP request. It logs the request and extracts relevant weather data features for prediction.</span></p><pre><code class="python hljs"><span class="hljs-meta">@app.route(<span class="hljs-params">route=<span class="hljs-string">"http_trigger_lab6"</span>, auth_level=func.AuthLevel.FUNCTION</span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">http_trigger_lab6</span>(<span class="hljs-params">req: func.HttpRequest</span>) -&gt; func.HttpResponse:
+    logging.info(<span class="hljs-string">'Python HTTP trigger function processed a request.'</span>)
+
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-comment"># Get request body data</span>
+        req_body = req.get_json()
+        logging.info(<span class="hljs-string">f"Request body: <span class="hljs-subst">{req_body}</span>"</span>)
+</code></pre><hr><h4 id="4-Extracting-Features-for-Prediction" data-id="4-Extracting-Features-for-Prediction"><span>4. </span><strong><span>Extracting Features for Prediction</span></strong></h4><p><span>The function extracts weather-related features from the request body. These features are expected to match the input format required by the pre-trained model.</span></p><pre><code class="python hljs">        <span class="hljs-comment"># Extract the necessary features for prediction</span>
+        features = [
+            <span class="hljs-string">'Location'</span>: req_body.get(<span class="hljs-string">'Location'</span>),
+            <span class="hljs-string">'MinTemp'</span>: req_body.get(<span class="hljs-string">'MinTemp'</span>),
+            <span class="hljs-string">'MaxTemp'</span>: req_body.get(<span class="hljs-string">'MaxTemp'</span>),
+            <span class="hljs-string">'Rainfall'</span>: req_body.get(<span class="hljs-string">'Rainfall'</span>),
+            <span class="hljs-string">'Evaporation'</span>: req_body.get(<span class="hljs-string">'Evaporation'</span>),
+            <span class="hljs-string">'Sunshine'</span>: req_body.get(<span class="hljs-string">'Sunshine'</span>),
+            <span class="hljs-string">'WindGustDir'</span>: req_body.get(<span class="hljs-string">'WindGustDir'</span>),
+            <span class="hljs-string">'WindGustSpeed'</span>: req_body.get(<span class="hljs-string">'WindGustSpeed'</span>),
+            <span class="hljs-string">'WindDir9am'</span>: req_body.get(<span class="hljs-string">'WindDir9am'</span>),
+            <span class="hljs-string">'WindDir3pm'</span>: req_body.get(<span class="hljs-string">'WindDir3pm'</span>),
+            <span class="hljs-string">'WindSpeed9am'</span>: req_body.get(<span class="hljs-string">'WindSpeed9am'</span>),
+            <span class="hljs-string">'WindSpeed3pm'</span>: req_body.get(<span class="hljs-string">'WindSpeed3pm'</span>),
+            <span class="hljs-string">'Humidity9am'</span>: req_body.get(<span class="hljs-string">'Humidity9am'</span>),
+            <span class="hljs-string">'Humidity3pm'</span>: req_body.get(<span class="hljs-string">'Humidity3pm'</span>),
+            <span class="hljs-string">'Pressure9am'</span>: req_body.get(<span class="hljs-string">'Pressure9am'</span>),
+            <span class="hljs-string">'Pressure3pm'</span>: req_body.get(<span class="hljs-string">'Pressure3pm'</span>),
+            <span class="hljs-string">'Cloud9am'</span>: req_body.get(<span class="hljs-string">'Cloud9am'</span>),
+            <span class="hljs-string">'Cloud3pm'</span>: req_body.get(<span class="hljs-string">'Cloud3pm'</span>),
+            <span class="hljs-string">'Temp9am'</span>: req_body.get(<span class="hljs-string">'Temp9am'</span>),
+            <span class="hljs-string">'Temp3pm'</span>: req_body.get(<span class="hljs-string">'Temp3pm'</span>),
+            <span class="hljs-string">'RainToday'</span>: req_body.get(<span class="hljs-string">'RainToday'</span>)
+        ]
+        
+        <span class="hljs-comment"># Convert features to the correct format (e.g., NumPy array or DataFrame)</span>
+        features = [features]  <span class="hljs-comment"># Reshape into 2D array if necessary</span>
+</code></pre><hr><h4 id="5-Making-a-Prediction-Using-the-Model" data-id="5-Making-a-Prediction-Using-the-Model"><span>5. </span><strong><span>Making a Prediction Using the Model</span></strong></h4><p><span>The features are passed to the loaded model to predict whether it will rain tomorrow. The model outputs </span><code>1</code><span> if rain is predicted and </span><code>0</code><span> otherwise.</span></p><pre><code class="python hljs">        <span class="hljs-comment"># Make a prediction using the loaded model</span>
+        prediction = model.predict(features)
+        logging.info(<span class="hljs-string">f"Model prediction: <span class="hljs-subst">{prediction}</span>"</span>)
+</code></pre><hr><h4 id="6-Sending-a-Command-if-Rain-is-Predicted" data-id="6-Sending-a-Command-if-Rain-is-Predicted"><span>6. </span><strong><span>Sending a Command if Rain is Predicted</span></strong></h4><p><span>If rain is predicted, the function sends a </span><strong><span>command</span></strong><span> to the listening IoT device through an HTTP POST request. The command notifies the device to activate a rain alert.</span></p><pre><code class="python hljs">        <span class="hljs-keyword">if</span> prediction[<span class="hljs-number">0</span>] == <span class="hljs-number">1</span>:  <span class="hljs-comment"># If rain is predicted</span>
+            logging.info(<span class="hljs-string">"Rain predicted for tomorrow. Sending command to device..."</span>)
+            
+            <span class="hljs-comment"># URL to send the command to the listening device</span>
+            device_command_url = <span class="hljs-string">'https://your-device-command-url'</span>  <span class="hljs-comment"># Replace with actual URL</span>
+            
+            <span class="hljs-comment"># Command data to be sent</span>
+            command_data = {
+                <span class="hljs-string">"command"</span>: <span class="hljs-string">"TurnOnRainAlert"</span>,
+                <span class="hljs-string">"message"</span>: <span class="hljs-string">"Rain Predicted Tomorrow!"</span>
+            }
+            headers = {<span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>}
+            
+            <span class="hljs-comment"># Send the command to the device</span>
+            response = requests.post(device_command_url, data=json.dumps(command_data), headers=headers)
+            
+            <span class="hljs-keyword">if</span> response.status_code == <span class="hljs-number">200</span>:
+                logging.info(<span class="hljs-string">f"Command sent to device successfully: <span class="hljs-subst">{response.text}</span>"</span>)
+                <span class="hljs-keyword">return</span> func.HttpResponse(<span class="hljs-string">f"Rain predicted, command sent successfully: <span class="hljs-subst">{response.text}</span>"</span>, status_code=<span class="hljs-number">200</span>)
+            <span class="hljs-keyword">else</span>:
+                logging.error(<span class="hljs-string">f"Failed to send command to device: <span class="hljs-subst">{response.text}</span>"</span>)
+                <span class="hljs-keyword">return</span> func.HttpResponse(<span class="hljs-string">f"Rain predicted, but command failed: <span class="hljs-subst">{response.text}</span>"</span>, status_code=<span class="hljs-number">500</span>)
+</code></pre><hr><h4 id="7-Handling-the-Case-When-No-Rain-is-Predicted" data-id="7-Handling-the-Case-When-No-Rain-is-Predicted"><span>7. </span><strong><span>Handling the Case When No Rain is Predicted</span></strong></h4><p><span>If the model predicts no rain, a simple HTTP response is returned.</span></p><pre><code class="python hljs">        <span class="hljs-keyword">else</span>:
+            logging.info(<span class="hljs-string">"No rain predicted for tomorrow."</span>)
+            <span class="hljs-keyword">return</span> func.HttpResponse(<span class="hljs-string">"No rain predicted for tomorrow."</span>, status_code=<span class="hljs-number">200</span>)
+</code></pre><hr><h4 id="8-Exception-Handling" data-id="8-Exception-Handling"><span>8. </span><strong><span>Exception Handling</span></strong></h4><p><span>Any errors during the function’s execution are caught, logged, and returned with a </span><code>500</code><span> status code.</span></p><pre><code class="python hljs">    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+        logging.error(<span class="hljs-string">f"Error processing the request: <span class="hljs-subst">{<span class="hljs-built_in">str</span>(e)}</span>"</span>)
+        <span class="hljs-keyword">return</span> func.HttpResponse(<span class="hljs-string">f"Error processing the request: <span class="hljs-subst">{<span class="hljs-built_in">str</span>(e)}</span>"</span>, status_code=<span class="hljs-number">500</span>)
+</code></pre><h3 id="The-screenshot-of-logs-from-Azure-Function-indicating-the-successful-run" data-id="The-screenshot-of-logs-from-Azure-Function-indicating-the-successful-run"><span>The screenshot of logs from Azure Function indicating the successful run</span></h3><p><img src="https://hackmd.io/_uploads/HyFHN2C11l.png" alt="message_received" class="offline-handled error-handled" loading="lazy"><br>
+<img src="https://hackmd.io/_uploads/B1m8V3A1ye.png" alt="ml_prediction" class="offline-handled error-handled" loading="lazy"></p><p><img src="https://hackmd.io/_uploads/BkNVrhCkkx.png" alt="ss4" class="offline-handled error-handled" loading="lazy"></p><hr><h2 id="Development-Process-Challenges-and-Troubleshooting" data-id="Development-Process-Challenges-and-Troubleshooting"><span>Development Process Challenges and Troubleshooting</span></h2><ol style="padding-left: 2em;">
+<li>
+<p><strong><span>Challenges:</span></strong></p>
+<ul>
+<li><strong><span>API Authentication Errors:</span></strong><span> During initial testing, the IoT Central device failed to connect due to an incorrect device key or expired API token. The device returned 401 Unauthorized errors, which indicated an issue with credentials.</span></li>
+<li><strong><span>Data Format Mismatch:</span></strong><span> The machine learning model expected input features in a specific 2D array format, but the incoming data from IoT Central requests was not properly reshaped, resulting in prediction errors.</span></li>
+<li><strong><span>Connectivity Issues:</span></strong><span> There were intermittent connection failures between the device and IoT Central, likely due to network instability.</span></li>
+<li><strong><span>Azure Function Deployment Errors:</span></strong><span> While deploying the Azure Function, issues with missing dependencies were encountered, causing the function to fail during execution.</span></li>
+<li><strong><span>Command Delivery Failures:</span></strong><span> The device occasionally failed to receive commands from the Azure function due to incorrect API URLs or device unavailability.</span></li>
+</ul>
+</li>
+<li>
+<p><strong><span>Troubleshooting Steps:</span></strong></p>
+<ul>
+<li><strong><span>API Authentication:</span></strong><span> Double-checked the scope ID, device ID, and device key, ensuring that the correct credentials were being used. Generated a new API token to replace the expired one.</span></li>
+<li><strong><span>Data Reshaping:</span></strong><span> Added a step in the Azure Function to convert the features into a 2D array to match the model's expected input format, which resolved the prediction errors.</span></li>
+<li><strong><span>Network Connectivity:</span></strong><span> Monitored network conditions and added error handling with retries to ensure the device reconnected to IoT Central in case of disconnections.</span></li>
+<li><strong><span>Azure Function Dependencies:</span></strong><span> Updated the </span><code>requirements.txt</code><span> file in the Azure Function project to include all necessary libraries (e.g., </span><code>joblib</code><span>, </span><code>requests</code><span>) and redeployed the function.</span></li>
+<li><strong><span>Command URL Corrections:</span></strong><span> Verified the API URL and device ID used in the command requests. Added logging to track API responses, which helped identify and fix endpoint issues.</span></li>
+<li><strong><span>Device Availability:</span></strong><span> Ensured that the listening IoT device was online and correctly registered in IoT Central before sending commands, preventing delivery failures.</span></li>
+</ul>
+</li>
+</ol><hr><h2 id="References" data-id="References"><span>References</span></h2><ul>
+<li><a href="https://learn.microsoft.com/en-us/rest/api/iotcentral/" target="_blank" rel="noopener"><span>Azure IoT Central Documentation</span></a></li>
+<li><a href="https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package" target="_blank" rel="noopener"><span>Rain in Australia Dataset on Kaggle</span></a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/azure-functions/" target="_blank" rel="noopener"><span>Azure Functions Documentation</span></a></li>
+</ul><hr><h2 id="Appendix" data-id="Appendix"><span>Appendix</span></h2><h3 id="CODE-FILE-FOR-ML-PROCESSING" data-id="CODE-FILE-FOR-ML-PROCESSING"><span>CODE FILE FOR ML PROCESSING</span></h3><pre><code class="python hljs"><div class="wrapper"><div class="gutter linenumber"><span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span></div><div class="code"><span class="hljs-comment"># Load all the libraries</span>
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pickle
+
+<span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+<span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> StandardScaler
+<span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> accuracy_score, classification_report
+<span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LogisticRegression
+
+<span class="hljs-comment"># Load the data</span>
+dataset = <span class="hljs-string">'weatherAUS.csv'</span>
+rain = pd.read_csv(dataset)
+
+<span class="hljs-comment"># Reduce the cardinality of date by splitting it into year month and day</span>
+rain[<span class="hljs-string">'Date'</span>] = pd.to_datetime(rain[<span class="hljs-string">'Date'</span>])
+rain[<span class="hljs-string">'year'</span>] = rain[<span class="hljs-string">'Date'</span>].dt.year
+rain[<span class="hljs-string">'month'</span>] = rain[<span class="hljs-string">'Date'</span>].dt.month
+rain[<span class="hljs-string">'day'</span>] = rain[<span class="hljs-string">'Date'</span>].dt.day
+rain.drop(<span class="hljs-string">'Date'</span>, axis = <span class="hljs-number">1</span>, inplace = <span class="hljs-literal">True</span>)
+
+<span class="hljs-comment"># Classify feature type</span>
+categorical_features = [
+    column_name 
+    <span class="hljs-keyword">for</span> column_name <span class="hljs-keyword">in</span> rain.columns 
+    <span class="hljs-keyword">if</span> rain[column_name].dtype == <span class="hljs-string">'O'</span>
+]
+
+numerical_features = [
+    column_name 
+    <span class="hljs-keyword">for</span> column_name <span class="hljs-keyword">in</span> rain.columns 
+    <span class="hljs-keyword">if</span> rain[column_name].dtype != <span class="hljs-string">'O'</span>
+]
+
+<span class="hljs-comment"># Fill missing categorical values with the highest frequency value in the column</span>
+categorical_features_with_null = [
+    feature 
+    <span class="hljs-keyword">for</span> feature <span class="hljs-keyword">in</span> categorical_features 
+    <span class="hljs-keyword">if</span> rain[feature].isnull().<span class="hljs-built_in">sum</span>()
+]
+
+<span class="hljs-keyword">for</span> each_feature <span class="hljs-keyword">in</span> categorical_features_with_null:
+    mode_val = rain[each_feature].mode()[<span class="hljs-number">0</span>]
+    rain[each_feature].fillna(mode_val,inplace=<span class="hljs-literal">True</span>)
+
+<span class="hljs-comment"># Before treating the missing values in numerical values, treat the outliers</span>
+features_with_outliers = [
+    <span class="hljs-string">'MinTemp'</span>, 
+    <span class="hljs-string">'MaxTemp'</span>, 
+    <span class="hljs-string">'Rainfall'</span>, 
+    <span class="hljs-string">'Evaporation'</span>, 
+    <span class="hljs-string">'WindGustSpeed'</span>,
+    <span class="hljs-string">'WindSpeed9am'</span>, 
+    <span class="hljs-string">'WindSpeed3pm'</span>, 
+    <span class="hljs-string">'Humidity9am'</span>, 
+    <span class="hljs-string">'Pressure9am'</span>, 
+    <span class="hljs-string">'Pressure3pm'</span>, 
+    <span class="hljs-string">'Temp9am'</span>, 
+    <span class="hljs-string">'Temp3pm'</span>
+]
+
+<span class="hljs-keyword">for</span> feature <span class="hljs-keyword">in</span> features_with_outliers:
+    q1 = rain[feature].quantile(<span class="hljs-number">0.25</span>)
+    q3 = rain[feature].quantile(<span class="hljs-number">0.75</span>)
+    IQR = q3 - q1
+    lower_limit = q1 - (IQR * <span class="hljs-number">1.5</span>)
+    upper_limit = q3 + (IQR * <span class="hljs-number">1.5</span>)
+    rain.loc[rain[feature]&lt;lower_limit,feature] = lower_limit
+    rain.loc[rain[feature]&gt;upper_limit,feature] = upper_limit
+
+<span class="hljs-comment"># Treat missing values in numerical features</span>
+numerical_features_with_null = [
+    feature 
+    <span class="hljs-keyword">for</span> feature <span class="hljs-keyword">in</span> numerical_features 
+    <span class="hljs-keyword">if</span> rain[feature].isnull().<span class="hljs-built_in">sum</span>()
+]
+
+<span class="hljs-keyword">for</span> feature <span class="hljs-keyword">in</span> numerical_features_with_null:
+    mean_value = rain[feature].mean()
+    rain[feature].fillna(mean_value,inplace=<span class="hljs-literal">True</span>)
+
+
+<span class="hljs-comment"># Encoding categorical values as integers</span>
+direction_encoding = {
+    <span class="hljs-string">'W'</span>: <span class="hljs-number">0</span>, <span class="hljs-string">'WNW'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'WSW'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'NE'</span>: <span class="hljs-number">3</span>, <span class="hljs-string">'NNW'</span>: <span class="hljs-number">4</span>, 
+    <span class="hljs-string">'N'</span>: <span class="hljs-number">5</span>, <span class="hljs-string">'NNE'</span>: <span class="hljs-number">6</span>, <span class="hljs-string">'SW'</span>: <span class="hljs-number">7</span>, <span class="hljs-string">'ENE'</span>: <span class="hljs-number">8</span>, <span class="hljs-string">'SSE'</span>: <span class="hljs-number">9</span>, 
+    <span class="hljs-string">'S'</span>: <span class="hljs-number">10</span>, <span class="hljs-string">'NW'</span>: <span class="hljs-number">11</span>, <span class="hljs-string">'SE'</span>: <span class="hljs-number">12</span>, <span class="hljs-string">'ESE'</span>: <span class="hljs-number">13</span>, <span class="hljs-string">'E'</span>: <span class="hljs-number">14</span>, <span class="hljs-string">'SSW'</span>: <span class="hljs-number">15</span>
+}
+
+location_encoding = {
+    <span class="hljs-string">'Albury'</span>: <span class="hljs-number">0</span>, 
+    <span class="hljs-string">'BadgerysCreek'</span>: <span class="hljs-number">1</span>, 
+    <span class="hljs-string">'Cobar'</span>: <span class="hljs-number">2</span>, 
+    <span class="hljs-string">'CoffsHarbour'</span>: <span class="hljs-number">3</span>, 
+    <span class="hljs-string">'Moree'</span>: <span class="hljs-number">4</span>, 
+    <span class="hljs-string">'Newcastle'</span>: <span class="hljs-number">5</span>, 
+    <span class="hljs-string">'NorahHead'</span>: <span class="hljs-number">6</span>, 
+    <span class="hljs-string">'NorfolkIsland'</span>: <span class="hljs-number">7</span>, 
+    <span class="hljs-string">'Penrith'</span>: <span class="hljs-number">8</span>, 
+    <span class="hljs-string">'Richmond'</span>: <span class="hljs-number">9</span>, 
+    <span class="hljs-string">'Sydney'</span>: <span class="hljs-number">10</span>, 
+    <span class="hljs-string">'SydneyAirport'</span>: <span class="hljs-number">11</span>, 
+    <span class="hljs-string">'WaggaWagga'</span>: <span class="hljs-number">12</span>, 
+    <span class="hljs-string">'Williamtown'</span>: <span class="hljs-number">13</span>, 
+    <span class="hljs-string">'Wollongong'</span>: <span class="hljs-number">14</span>, 
+    <span class="hljs-string">'Canberra'</span>: <span class="hljs-number">15</span>, 
+    <span class="hljs-string">'Tuggeranong'</span>: <span class="hljs-number">16</span>, 
+    <span class="hljs-string">'MountGinini'</span>: <span class="hljs-number">17</span>, 
+    <span class="hljs-string">'Ballarat'</span>: <span class="hljs-number">18</span>, 
+    <span class="hljs-string">'Bendigo'</span>: <span class="hljs-number">19</span>, 
+    <span class="hljs-string">'Sale'</span>: <span class="hljs-number">20</span>, 
+    <span class="hljs-string">'MelbourneAirport'</span>: <span class="hljs-number">21</span>, 
+    <span class="hljs-string">'Melbourne'</span>: <span class="hljs-number">22</span>, 
+    <span class="hljs-string">'Mildura'</span>: <span class="hljs-number">23</span>, 
+    <span class="hljs-string">'Nhil'</span>: <span class="hljs-number">24</span>, 
+    <span class="hljs-string">'Portland'</span>: <span class="hljs-number">25</span>,
+    <span class="hljs-string">'Watsonia'</span>: <span class="hljs-number">26</span>, 
+    <span class="hljs-string">'Dartmoor'</span>: <span class="hljs-number">27</span>, 
+    <span class="hljs-string">'Brisbane'</span>: <span class="hljs-number">28</span>, 
+    <span class="hljs-string">'Cairns'</span>: <span class="hljs-number">29</span>, 
+    <span class="hljs-string">'GoldCoast'</span>: <span class="hljs-number">30</span>, 
+    <span class="hljs-string">'Townsville'</span>: <span class="hljs-number">31</span>, 
+    <span class="hljs-string">'Adelaide'</span>: <span class="hljs-number">32</span>, 
+    <span class="hljs-string">'MountGambier'</span>: <span class="hljs-number">33</span>, 
+    <span class="hljs-string">'Nuriootpa'</span>: <span class="hljs-number">34</span>, 
+    <span class="hljs-string">'Woomera'</span>: <span class="hljs-number">35</span>, 
+    <span class="hljs-string">'Albany'</span>: <span class="hljs-number">36</span>, 
+    <span class="hljs-string">'Witchcliffe'</span>: <span class="hljs-number">37</span>, 
+    <span class="hljs-string">'PearceRAAF'</span>: <span class="hljs-number">38</span>, 
+    <span class="hljs-string">'PerthAirport'</span>: <span class="hljs-number">39</span>, 
+    <span class="hljs-string">'Perth'</span>: <span class="hljs-number">40</span>, 
+    <span class="hljs-string">'SalmonGums'</span>: <span class="hljs-number">41</span>, 
+    <span class="hljs-string">'Walpole'</span>: <span class="hljs-number">42</span>, 
+    <span class="hljs-string">'Hobart'</span>: <span class="hljs-number">43</span>, 
+    <span class="hljs-string">'Launceston'</span>: <span class="hljs-number">44</span>, 
+    <span class="hljs-string">'AliceSprings'</span>: <span class="hljs-number">45</span>, 
+    <span class="hljs-string">'Darwin'</span>: <span class="hljs-number">46</span>, 
+    <span class="hljs-string">'Katherine'</span>: <span class="hljs-number">47</span>, 
+    <span class="hljs-string">'Uluru'</span>: <span class="hljs-number">48</span>
+}
+boolean_encoding = {<span class="hljs-string">'No'</span>: <span class="hljs-number">0</span>, <span class="hljs-string">'Yes'</span>: <span class="hljs-number">1</span>}
+
+
+rain[<span class="hljs-string">'RainToday'</span>].replace(boolean_encoding, inplace = <span class="hljs-literal">True</span>)
+rain[<span class="hljs-string">'RainTomorrow'</span>].replace(boolean_encoding, inplace = <span class="hljs-literal">True</span>)
+rain[<span class="hljs-string">'WindGustDir'</span>].replace(direction_encoding,inplace = <span class="hljs-literal">True</span>)
+rain[<span class="hljs-string">'WindDir9am'</span>].replace(direction_encoding,inplace = <span class="hljs-literal">True</span>)
+rain[<span class="hljs-string">'WindDir3pm'</span>].replace(direction_encoding,inplace = <span class="hljs-literal">True</span>)
+rain[<span class="hljs-string">'Location'</span>].replace(location_encoding, inplace = <span class="hljs-literal">True</span>)
+
+<span class="hljs-comment"># See the distribution of the dataset</span>
+<span class="hljs-built_in">print</span>(rain[<span class="hljs-string">'RainTomorrow'</span>].value_counts())
+
+<span class="hljs-comment"># Split off 5% of the data for validation before processing</span>
+rain_train, rain_validation = train_test_split(rain, test_size=<span class="hljs-number">0.05</span>, random_state=<span class="hljs-number">42</span>)
+
+<span class="hljs-comment"># Save the 5% validation data into a CSV file</span>
+rain_validation.to_csv(<span class="hljs-string">'rain_validation.csv'</span>, index=<span class="hljs-literal">False</span>)
+
+<span class="hljs-comment"># Split remaining data into features (X) and target (y)</span>
+X = rain_train.drop([<span class="hljs-string">'RainTomorrow'</span>], axis=<span class="hljs-number">1</span>)
+y = rain_train[<span class="hljs-string">'RainTomorrow'</span>]
+
+<span class="hljs-comment"># Split training and test sets (from the remaining 95%)</span>
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="hljs-number">0.2</span>, random_state=<span class="hljs-number">0</span>)
+
+<span class="hljs-comment"># Scale input using just the training set to prevent bias</span>
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+<span class="hljs-comment"># Train the model</span>
+classifier_logreg = LogisticRegression(solver=<span class="hljs-string">'liblinear'</span>, random_state=<span class="hljs-number">0</span>)
+classifier_logreg.fit(X_train, y_train)
+
+<span class="hljs-comment"># Test the model accuracy</span>
+y_pred = classifier_logreg.predict(X_test)
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f"Accuracy Score: <span class="hljs-subst">{accuracy_score(y_test,y_pred)}</span>"</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">"Classifcation report"</span>, classification_report(y_test,y_pred))
+
+<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">"iot_model_ap"</span>, <span class="hljs-string">"wb"</span>) <span class="hljs-keyword">as</span> model_file:
+ pickle.dump(classifier_logreg, model_file)
+ 
+<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">"iot_model_ap"</span>, <span class="hljs-string">"rb"</span>) <span class="hljs-keyword">as</span> model_file:
+ model = pickle.load(model_file)
+y_pred_new = classifier_logreg.predict(X_test)
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">"Output of loaded model is same as original model ?"</span>, <span class="hljs-built_in">all</span>(y_pred == y_pred_new))
+
+<span class="hljs-comment">#api token: SharedAccessSignature sr=6229d12c-dc63-46dd-9596-a2a18172ecd5&amp;sig=7OEOpykqc0tOKnS9iok%2F0VFvyqRMl6rLzFRaw82Q9lA%3D&amp;skn=apalatoken&amp;se=1760316177274</span>
+<span class="hljs-comment">#scope_id = '0ne00CE8956'</span>
+<span class="hljs-comment">#device_id = '1n8ug7dhy53'</span>
+<span class="hljs-comment">#device_key = 'EN+ERXcaXAHRdyvKdBxQR1IsEGyznvbb6NHsEKmEMto='</span>
+</div></div></code></pre><hr><h3 id="CODE-FILE-FOR-SENDING-DATA-TO-IOT-CENTRAL" data-id="CODE-FILE-FOR-SENDING-DATA-TO-IOT-CENTRAL"><span>CODE FILE FOR SENDING DATA TO IOT CENTRAL</span></h3><pre><code class="python hljs"><div class="wrapper"><div class="gutter linenumber"><span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span></div><div class="code"><span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> iotc.models <span class="hljs-keyword">import</span> Command
+<span class="hljs-keyword">from</span> iotc <span class="hljs-keyword">import</span> IoTCClient, IOTCConnectType, IOTCEvents
+
+<span class="hljs-comment"># IoT Central device credentials</span>
+scope_id = <span class="hljs-string">'0ne00D18E8C'</span>
+device_id = <span class="hljs-string">'1oqxy244di7'</span>
+device_key = <span class="hljs-string">'m3k5AQsOKu9PRApxzXOFFEDaJSozi/CeG7dSEIQPnww='</span>
+
+<span class="hljs-comment"># Load the 5% split dataset (rain_validation.csv)</span>
+rain_validation = pd.read_csv(<span class="hljs-string">"rain_validation.csv"</span>)  
+
+<span class="hljs-comment"># Function to handle incoming commands</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">on_commands</span>(<span class="hljs-params">command: Command</span>):
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f"<span class="hljs-subst">{command.name}</span> command was sent"</span>)
+    command.reply()
+
+<span class="hljs-comment"># Connect to IoT Central</span>
+iotc = IoTCClient(
+    device_id,
+    scope_id,
+    IOTCConnectType.IOTC_CONNECT_DEVICE_KEY,
+    device_key
+)
+
+iotc.connect()
+iotc.on(IOTCEvents.IOTC_COMMAND, on_commands)
+
+<span class="hljs-comment"># Sending telemetry data from the 5% split dataset</span>
+<span class="hljs-keyword">for</span> index, row <span class="hljs-keyword">in</span> rain_validation.iterrows():
+    <span class="hljs-keyword">if</span> iotc.is_connected():
+        TEL = {
+                         
+            <span class="hljs-string">'Location'</span>: row[<span class="hljs-string">'Location'</span>],
+            <span class="hljs-string">'MinTemp'</span>: row[<span class="hljs-string">'MinTemp'</span>],
+            <span class="hljs-string">'MaxTemp'</span>: row[<span class="hljs-string">'MaxTemp'</span>],
+            <span class="hljs-string">'Rainfall'</span>: row[<span class="hljs-string">'Rainfall'</span>],
+            <span class="hljs-string">'Evaporation'</span>: row[<span class="hljs-string">'Evaporation'</span>],
+            <span class="hljs-string">'Sunshine'</span>: row[<span class="hljs-string">'Sunshine'</span>],
+            <span class="hljs-string">'WindGustDir'</span>: row[<span class="hljs-string">'WindGustDir'</span>],
+            <span class="hljs-string">'WindGustSpeed'</span>: row[<span class="hljs-string">'WindGustSpeed'</span>],
+            <span class="hljs-string">'WindDir9am'</span>: row[<span class="hljs-string">'WindDir9am'</span>],
+            <span class="hljs-string">'WindDir3pm'</span>: row[<span class="hljs-string">'WindDir3pm'</span>],
+            <span class="hljs-string">'WindSpeed9am'</span>: row[<span class="hljs-string">'WindSpeed9am'</span>],
+            <span class="hljs-string">'WindSpeed3pm'</span>: row[<span class="hljs-string">'WindSpeed3pm'</span>],
+            <span class="hljs-string">'Humidity9am'</span>: row[<span class="hljs-string">'Humidity9am'</span>],
+            <span class="hljs-string">'Humidity3pm'</span>: row[<span class="hljs-string">'Humidity3pm'</span>],
+            <span class="hljs-string">'Pressure9am'</span>: row[<span class="hljs-string">'Pressure9am'</span>],
+            <span class="hljs-string">'Pressure3pm'</span>: row[<span class="hljs-string">'Pressure3pm'</span>],
+            <span class="hljs-string">'Cloud9am'</span>: row[<span class="hljs-string">'Cloud9am'</span>],
+            <span class="hljs-string">'Cloud3pm'</span>: row[<span class="hljs-string">'Cloud3pm'</span>],
+            <span class="hljs-string">'Temp9am'</span>: row[<span class="hljs-string">'Temp9am'</span>],
+            <span class="hljs-string">'Temp3pm'</span>: row[<span class="hljs-string">'Temp3pm'</span>],
+            <span class="hljs-string">'RainToday'</span>: row[<span class="hljs-string">'RainToday'</span>]
+        }
+        
+        <span class="hljs-comment"># Send telemetry to IoT Central</span>
+        iotc.send_telemetry(TEL)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f"Telemetry sent: <span class="hljs-subst">{TEL}</span>"</span>)
+        
+        <span class="hljs-comment"># Sleep for a short duration before sending the next row of data</span>
+        time.sleep(<span class="hljs-number">10</span>)  <span class="hljs-comment"># Adjust as needed (10 seconds per data entry)</span>
+
+
+
+<span class="hljs-string">"""
+listening device
+
+scope: 0ne00D18E8C
+dev id: 13rio316qdu
+primary : 6VdOgcQq5PagwDmn/MOXHtTiNhQzrKYZmGvrDfaZnaU=
+
+
+"""</span>
+</div></div></code></pre><hr><h3 id="CODE-FILE-FOR-PREDICTIONA-AND-SENDING-COMMAND" data-id="CODE-FILE-FOR-PREDICTIONA-AND-SENDING-COMMAND"><span>CODE FILE FOR PREDICTIONA AND SENDING COMMAND</span></h3><pre><code class="python hljs"><span class="hljs-keyword">import</span> azure.functions <span class="hljs-keyword">as</span> func
+<span class="hljs-keyword">import</span> joblib
+<span class="hljs-keyword">import</span> logging
+<span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">import</span> requests
+
+app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
+
+model = joblib.load(<span class="hljs-string">'iot_model_ap'</span>)
+
+
+
+<span class="hljs-meta">@app.route(<span class="hljs-params">route=<span class="hljs-string">"http_trigger_lab6"</span>, auth_level=func.AuthLevel.FUNCTION</span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">http_trigger_lab6</span>(<span class="hljs-params">req: func.HttpRequest</span>) -&gt; func.HttpResponse:
+    logging.info(<span class="hljs-string">'Python HTTP trigger function processed a request.'</span>)
+
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-comment"># Get request body data</span>
+        req_body = req.get_json()
+        logging.info(<span class="hljs-string">f"Request body: <span class="hljs-subst">{req_body}</span>"</span>)
+        
+        <span class="hljs-comment"># Extract the necessary features for prediction </span>
+        features = [
+             <span class="hljs-string">'Location'</span>: req_body.get(<span class="hljs-string">'Location'</span>),
+            <span class="hljs-string">'MinTemp'</span>: req_body.get(<span class="hljs-string">'MinTemp'</span>),
+            <span class="hljs-string">'MaxTemp'</span>: req_body.get(<span class="hljs-string">'MaxTemp'</span>),
+            <span class="hljs-string">'Rainfall'</span>: req_body.get(<span class="hljs-string">'Rainfall'</span>),
+            <span class="hljs-string">'Evaporation'</span>: req_body.get(<span class="hljs-string">'Evaporation'</span>),
+            <span class="hljs-string">'Sunshine'</span>: req_body.get(<span class="hljs-string">'Sunshine'</span>),
+            <span class="hljs-string">'WindGustDir'</span>: req_body.get(<span class="hljs-string">'WindGustDir'</span>),
+            <span class="hljs-string">'WindGustSpeed'</span>: req_body.get(<span class="hljs-string">'WindGustSpeed'</span>),
+            <span class="hljs-string">'WindDir9am'</span>: req_body.get(<span class="hljs-string">'WindDir9am'</span>),
+            <span class="hljs-string">'WindDir3pm'</span>: req_body.get(<span class="hljs-string">'WindDir3pm'</span>),
+            <span class="hljs-string">'WindSpeed9am'</span>: req_body.get(<span class="hljs-string">'WindSpeed9am'</span>),
+            <span class="hljs-string">'WindSpeed3pm'</span>: req_body.get(<span class="hljs-string">'WindSpeed3pm'</span>),
+            <span class="hljs-string">'Humidity9am'</span>: req_body.get(<span class="hljs-string">'Humidity9am'</span>),
+            <span class="hljs-string">'Humidity3pm'</span>: req_body.get(<span class="hljs-string">'Humidity3pm'</span>),
+            <span class="hljs-string">'Pressure9am'</span>: req_body.get(<span class="hljs-string">'Pressure9am'</span>),
+            <span class="hljs-string">'Pressure3pm'</span>: req_body.get(<span class="hljs-string">'Pressure3pm'</span>),
+            <span class="hljs-string">'Cloud9am'</span>: req_body.get(<span class="hljs-string">'Cloud9am'</span>),
+            <span class="hljs-string">'Cloud3pm'</span>: req_body.get(<span class="hljs-string">'Cloud3pm'</span>),
+            <span class="hljs-string">'Temp9am'</span>: req_body.get(<span class="hljs-string">'Temp9am'</span>),
+            <span class="hljs-string">'Temp3pm'</span>: req_body.get(<span class="hljs-string">'Temp3pm'</span>),
+            <span class="hljs-string">'RainToday'</span>: req_body.get(<span class="hljs-string">'RainToday'</span>)
+        ]
+        
+        <span class="hljs-comment"># Convert features to the correct format (e.g., NumPy array or DataFrame)</span>
+        <span class="hljs-comment"># Assuming the model expects a 2D array input</span>
+        features = [features]  <span class="hljs-comment"># Reshape into 2D array if necessary</span>
+        
+        <span class="hljs-comment"># Make a prediction using the loaded model</span>
+        prediction = model.predict(features)
+        
+        logging.info(<span class="hljs-string">f"Model prediction: <span class="hljs-subst">{prediction}</span>"</span>)
+        
+        <span class="hljs-comment"># Check if the model predicts rain tomorrow (assuming 'RainTomorrow' is 1 for rain, 0 for no rain)</span>
+        <span class="hljs-keyword">if</span> prediction[<span class="hljs-number">0</span>] == <span class="hljs-number">1</span>:  <span class="hljs-comment"># Modify based on how your model encodes rain</span>
+            logging.info(<span class="hljs-string">"Rain predicted for tomorrow. Sending command to device..."</span>)
+            
+            <span class="hljs-comment"># Send a command to the listening device (Assume the device is reachable via an API)</span>
+            device_command_url = <span class="hljs-string">'https://your-device-command-url'</span>  <span class="hljs-comment"># Replace with actual URL</span>
+            command_data = {
+                <span class="hljs-string">"command"</span>: <span class="hljs-string">"TurnOnRainAlert"</span>,
+                <span class="hljs-string">"message"</span>: <span class="hljs-string">"Rain Predicted Tomorrow!"</span>
+            }
+            headers = {<span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>}
+            
+            response = requests.post(device_command_url, data=json.dumps(command_data), headers=headers)
+            
+            <span class="hljs-keyword">if</span> response.status_code == <span class="hljs-number">200</span>:
+                logging.info(<span class="hljs-string">f"Command sent to device successfully: <span class="hljs-subst">{response.text}</span>"</span>)
+                <span class="hljs-keyword">return</span> func.HttpResponse(<span class="hljs-string">f"Rain predicted, command sent to device successfully: <span class="hljs-subst">{response.text}</span>"</span>, status_code=<span class="hljs-number">200</span>)
+            <span class="hljs-keyword">else</span>:
+                logging.error(<span class="hljs-string">f"Failed to send command to device: <span class="hljs-subst">{response.text}</span>"</span>)
+                <span class="hljs-keyword">return</span> func.HttpResponse(<span class="hljs-string">f"Rain predicted, but failed to send command to device: <span class="hljs-subst">{response.text}</span>"</span>, status_code=<span class="hljs-number">500</span>)
+        <span class="hljs-keyword">else</span>:
+            logging.info(<span class="hljs-string">"No rain predicted for tomorrow."</span>)
+            <span class="hljs-keyword">return</span> func.HttpResponse(<span class="hljs-string">"No rain predicted for tomorrow."</span>, status_code=<span class="hljs-number">200</span>)
+    
+    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+        logging.error(<span class="hljs-string">f"Error processing the request: <span class="hljs-subst">{<span class="hljs-built_in">str</span>(e)}</span>"</span>)
+        <span class="hljs-keyword">return</span> func.HttpResponse(<span class="hljs-string">f"Error processing the request: <span class="hljs-subst">{<span class="hljs-built_in">str</span>(e)}</span>"</span>, status_code=<span class="hljs-number">500</span>)
+
+
+</code></pre><hr></div>

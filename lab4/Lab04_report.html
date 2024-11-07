@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Lab04_report - HackMD
+    </title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+    <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" integrity="sha256-QiWfLIsCT02Sdwkogf6YMiQlj4NE84MKkzEMkZnMGdg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i|Source+Code+Pro:300,400,500|Source+Sans+Pro:300,300i,400,400i,600,600i|Source+Serif+Pro&subset=latin-ext);
+/*!
+  Theme: GitHub
+  Description: Light theme as seen on github.com
+  Author: github.com
+  Maintainer: @Hirse
+  Updated: 2021-05-15
+
+  Outdated base version: https://github.com/primer/github-syntax-light
+  Current colors taken from GitHub's CSS
+*/:root[theme=light] :not([theme])>*>.markdown-body .hljs-doctag,:root[theme=light] :not([theme])>*>.markdown-body .hljs-keyword,:root[theme=light] :not([theme])>*>.markdown-body .hljs-meta .hljs-keyword,:root[theme=light] :not([theme])>*>.markdown-body .hljs-template-tag,:root[theme=light] :not([theme])>*>.markdown-body .hljs-template-variable,:root[theme=light] :not([theme])>*>.markdown-body .hljs-type,:root[theme=light] :not([theme])>*>.markdown-body .hljs-variable.language_,:root[theme] [theme=light] .markdown-body .hljs-doctag,:root[theme] [theme=light] .markdown-body .hljs-keyword,:root[theme] [theme=light] .markdown-body .hljs-meta .hljs-keyword,:root[theme] [theme=light] .markdown-body .hljs-template-tag,:root[theme] [theme=light] .markdown-body .hljs-template-variable,:root[theme] [theme=light] .markdown-body .hljs-type,:root[theme] [theme=light] .markdown-body .hljs-variable.language_{color:#d73a49}:root[theme=light] :not([theme])>*>.markdown-body .hljs-title,:root[theme=light] :not([theme])>*>.markdown-body .hljs-title.class_,:root[theme=light] :not([theme])>*>.markdown-body .hljs-title.class_.inherited__,:root[theme=light] :not([theme])>*>.markdown-body .hljs-title.function_,:root[theme] [theme=light] .markdown-body .hljs-title,:root[theme] [theme=light] .markdown-body .hljs-title.class_,:root[theme] [theme=light] .markdown-body .hljs-title.class_.inherited__,:root[theme] [theme=light] .markdown-body .hljs-title.function_{color:#6f42c1}:root[theme=light] :not([theme])>*>.markdown-body .hljs-attr,:root[theme=light] :not([theme])>*>.markdown-body .hljs-attribute,:root[theme=light] :not([theme])>*>.markdown-body .hljs-literal,:root[theme=light] :not([theme])>*>.markdown-body .hljs-meta,:root[theme=light] :not([theme])>*>.markdown-body .hljs-number,:root[theme=light] :not([theme])>*>.markdown-body .hljs-operator,:root[theme=light] :not([theme])>*>.markdown-body .hljs-selector-attr,:root[theme=light] :not([theme])>*>.markdown-body .hljs-selector-class,:root[theme=light] :not([theme])>*>.markdown-body .hljs-selector-id,:root[theme=light] :not([theme])>*>.markdown-body .hljs-variable,:root[theme] [theme=light] .markdown-body .hljs-attr,:root[theme] [theme=light] .markdown-body .hljs-attribute,:root[theme] [theme=light] .markdown-body .hljs-literal,:root[theme] [theme=light] .markdown-body .hljs-meta,:root[theme] [theme=light] .markdown-body .hljs-number,:root[theme] [theme=light] .markdown-body .hljs-operator,:root[theme] [theme=light] .markdown-body .hljs-selector-attr,:root[theme] [theme=light] .markdown-body .hljs-selector-class,:root[theme] [theme=light] .markdown-body .hljs-selector-id,:root[theme] [theme=light] .markdown-body .hljs-variable{color:#005cc5}:root[theme=light] :not([theme])>*>.markdown-body .hljs-meta .hljs-string,:root[theme=light] :not([theme])>*>.markdown-body .hljs-regexp,:root[theme=light] :not([theme])>*>.markdown-body .hljs-string,:root[theme] [theme=light] .markdown-body .hljs-meta .hljs-string,:root[theme] [theme=light] .markdown-body .hljs-regexp,:root[theme] [theme=light] .markdown-body .hljs-string{color:#032f62}:root[theme=light] :not([theme])>*>.markdown-body .hljs-built_in,:root[theme=light] :not([theme])>*>.markdown-body .hljs-symbol,:root[theme] [theme=light] .markdown-body .hljs-built_in,:root[theme] [theme=light] .markdown-body .hljs-symbol{color:#e36209}:root[theme=light] :not([theme])>*>.markdown-body .hljs-code,:root[theme=light] :not([theme])>*>.markdown-body .hljs-comment,:root[theme=light] :not([theme])>*>.markdown-body .hljs-formula,:root[theme] [theme=light] .markdown-body .hljs-code,:root[theme] [theme=light] .markdown-body .hljs-comment,:root[theme] [theme=light] .markdown-body .hljs-formula{color:#6a737d}:root[theme=light] :not([theme])>*>.markdown-body .hljs-name,:root[theme=light] :not([theme])>*>.markdown-body .hljs-quote,:root[theme=light] :not([theme])>*>.markdown-body .hljs-selector-pseudo,:root[theme=light] :not([theme])>*>.markdown-body .hljs-selector-tag,:root[theme] [theme=light] .markdown-body .hljs-name,:root[theme] [theme=light] .markdown-body .hljs-quote,:root[theme] [theme=light] .markdown-body .hljs-selector-pseudo,:root[theme] [theme=light] .markdown-body .hljs-selector-tag{color:#22863a}:root[theme=light] :not([theme])>*>.markdown-body .hljs-subst,:root[theme] [theme=light] .markdown-body .hljs-subst{color:#24292e}:root[theme=light] :not([theme])>*>.markdown-body .hljs-section,:root[theme] [theme=light] .markdown-body .hljs-section{color:#005cc5;font-weight:700}:root[theme=light] :not([theme])>*>.markdown-body .hljs-bullet,:root[theme] [theme=light] .markdown-body .hljs-bullet{color:#735c0f}:root[theme=light] :not([theme])>*>.markdown-body .hljs-emphasis,:root[theme] [theme=light] .markdown-body .hljs-emphasis{color:#24292e;font-style:italic}:root[theme=light] :not([theme])>*>.markdown-body .hljs-strong,:root[theme] [theme=light] .markdown-body .hljs-strong{color:#24292e;font-weight:700}:root[theme=light] :not([theme])>*>.markdown-body .hljs-addition,:root[theme] [theme=light] .markdown-body .hljs-addition{background-color:#f0fff4;color:#22863a}:root[theme=light] :not([theme])>*>.markdown-body .hljs-deletion,:root[theme] [theme=light] .markdown-body .hljs-deletion{background-color:#ffeef0;color:#b31d28}
+
+/*!
+  Theme: GitHub Dark Dimmed
+  Description: Dark dimmed theme as seen on github.com
+  Author: github.com
+  Maintainer: @Hirse
+  Updated: 2021-05-15
+
+  Colors taken from GitHub's CSS
+*/:root[theme=dark] :not([theme])>*>.markdown-body .hljs-doctag,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-keyword,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-meta .hljs-keyword,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-template-tag,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-template-variable,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-type,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-variable.language_,:root[theme] [theme=dark] .markdown-body .hljs-doctag,:root[theme] [theme=dark] .markdown-body .hljs-keyword,:root[theme] [theme=dark] .markdown-body .hljs-meta .hljs-keyword,:root[theme] [theme=dark] .markdown-body .hljs-template-tag,:root[theme] [theme=dark] .markdown-body .hljs-template-variable,:root[theme] [theme=dark] .markdown-body .hljs-type,:root[theme] [theme=dark] .markdown-body .hljs-variable.language_{color:#f47067}:root[theme=dark] :not([theme])>*>.markdown-body .hljs-title,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-title.class_,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-title.class_.inherited__,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-title.function_,:root[theme] [theme=dark] .markdown-body .hljs-title,:root[theme] [theme=dark] .markdown-body .hljs-title.class_,:root[theme] [theme=dark] .markdown-body .hljs-title.class_.inherited__,:root[theme] [theme=dark] .markdown-body .hljs-title.function_{color:#dcbdfb}:root[theme=dark] :not([theme])>*>.markdown-body .hljs-attr,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-attribute,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-literal,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-meta,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-number,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-operator,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-selector-attr,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-selector-class,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-selector-id,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-variable,:root[theme] [theme=dark] .markdown-body .hljs-attr,:root[theme] [theme=dark] .markdown-body .hljs-attribute,:root[theme] [theme=dark] .markdown-body .hljs-literal,:root[theme] [theme=dark] .markdown-body .hljs-meta,:root[theme] [theme=dark] .markdown-body .hljs-number,:root[theme] [theme=dark] .markdown-body .hljs-operator,:root[theme] [theme=dark] .markdown-body .hljs-selector-attr,:root[theme] [theme=dark] .markdown-body .hljs-selector-class,:root[theme] [theme=dark] .markdown-body .hljs-selector-id,:root[theme] [theme=dark] .markdown-body .hljs-variable{color:#6cb6ff}:root[theme=dark] :not([theme])>*>.markdown-body .hljs-meta .hljs-string,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-regexp,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-string,:root[theme] [theme=dark] .markdown-body .hljs-meta .hljs-string,:root[theme] [theme=dark] .markdown-body .hljs-regexp,:root[theme] [theme=dark] .markdown-body .hljs-string{color:#96d0ff}:root[theme=dark] :not([theme])>*>.markdown-body .hljs-built_in,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-symbol,:root[theme] [theme=dark] .markdown-body .hljs-built_in,:root[theme] [theme=dark] .markdown-body .hljs-symbol{color:#f69d50}:root[theme=dark] :not([theme])>*>.markdown-body .hljs-code,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-comment,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-formula,:root[theme] [theme=dark] .markdown-body .hljs-code,:root[theme] [theme=dark] .markdown-body .hljs-comment,:root[theme] [theme=dark] .markdown-body .hljs-formula{color:#768390}:root[theme=dark] :not([theme])>*>.markdown-body .hljs-name,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-quote,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-selector-pseudo,:root[theme=dark] :not([theme])>*>.markdown-body .hljs-selector-tag,:root[theme] [theme=dark] .markdown-body .hljs-name,:root[theme] [theme=dark] .markdown-body .hljs-quote,:root[theme] [theme=dark] .markdown-body .hljs-selector-pseudo,:root[theme] [theme=dark] .markdown-body .hljs-selector-tag{color:#8ddb8c}:root[theme=dark] :not([theme])>*>.markdown-body .hljs-subst,:root[theme] [theme=dark] .markdown-body .hljs-subst{color:#adbac7}:root[theme=dark] :not([theme])>*>.markdown-body .hljs-section,:root[theme] [theme=dark] .markdown-body .hljs-section{color:#316dca;font-weight:700}:root[theme=dark] :not([theme])>*>.markdown-body .hljs-bullet,:root[theme] [theme=dark] .markdown-body .hljs-bullet{color:#eac55f}:root[theme=dark] :not([theme])>*>.markdown-body .hljs-emphasis,:root[theme] [theme=dark] .markdown-body .hljs-emphasis{color:#adbac7;font-style:italic}:root[theme=dark] :not([theme])>*>.markdown-body .hljs-strong,:root[theme] [theme=dark] .markdown-body .hljs-strong{color:#adbac7;font-weight:700}:root[theme=dark] :not([theme])>*>.markdown-body .hljs-addition,:root[theme] [theme=dark] .markdown-body .hljs-addition{background-color:#1b4721;color:#b4f1b4}:root[theme=dark] :not([theme])>*>.markdown-body .hljs-deletion,:root[theme] [theme=dark] .markdown-body .hljs-deletion{background-color:#78191b;color:#ffd8d3}:root[theme=dark] :not([theme])>*>.markdown-body code[class*=language-],:root[theme=dark] :not([theme])>*>.markdown-body pre[class*=language-],:root[theme] [theme=dark] .markdown-body code[class*=language-],:root[theme] [theme=dark] .markdown-body pre[class*=language-]{word-wrap:normal;background:none;color:#ccc;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}:root[theme=dark] :not([theme])>*>.markdown-body pre[class*=language-],:root[theme] [theme=dark] .markdown-body pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:root[theme=dark] :not([theme])>*>.markdown-body :not(pre)>code[class*=language-],:root[theme=dark] :not([theme])>*>.markdown-body pre[class*=language-],:root[theme] [theme=dark] .markdown-body :not(pre)>code[class*=language-],:root[theme] [theme=dark] .markdown-body pre[class*=language-]{background:#2d2d2d}:root[theme=dark] :not([theme])>*>.markdown-body :not(pre)>code[class*=language-],:root[theme] [theme=dark] .markdown-body :not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}:root[theme=dark] :not([theme])>*>.markdown-body .token.block-comment,:root[theme=dark] :not([theme])>*>.markdown-body .token.cdata,:root[theme=dark] :not([theme])>*>.markdown-body .token.comment,:root[theme=dark] :not([theme])>*>.markdown-body .token.doctype,:root[theme=dark] :not([theme])>*>.markdown-body .token.prolog,:root[theme] [theme=dark] .markdown-body .token.block-comment,:root[theme] [theme=dark] .markdown-body .token.cdata,:root[theme] [theme=dark] .markdown-body .token.comment,:root[theme] [theme=dark] .markdown-body .token.doctype,:root[theme] [theme=dark] .markdown-body .token.prolog{color:#999}:root[theme=dark] :not([theme])>*>.markdown-body .token.punctuation,:root[theme] [theme=dark] .markdown-body .token.punctuation{color:#ccc}:root[theme=dark] :not([theme])>*>.markdown-body .token.attr-name,:root[theme=dark] :not([theme])>*>.markdown-body .token.deleted,:root[theme=dark] :not([theme])>*>.markdown-body .token.namespace,:root[theme=dark] :not([theme])>*>.markdown-body .token.tag,:root[theme] [theme=dark] .markdown-body .token.attr-name,:root[theme] [theme=dark] .markdown-body .token.deleted,:root[theme] [theme=dark] .markdown-body .token.namespace,:root[theme] [theme=dark] .markdown-body .token.tag{color:#e2777a}:root[theme=dark] :not([theme])>*>.markdown-body .token.function-name,:root[theme] [theme=dark] .markdown-body .token.function-name{color:#6196cc}:root[theme=dark] :not([theme])>*>.markdown-body .token.boolean,:root[theme=dark] :not([theme])>*>.markdown-body .token.function,:root[theme=dark] :not([theme])>*>.markdown-body .token.number,:root[theme] [theme=dark] .markdown-body .token.boolean,:root[theme] [theme=dark] .markdown-body .token.function,:root[theme] [theme=dark] .markdown-body .token.number{color:#f08d49}:root[theme=dark] :not([theme])>*>.markdown-body .token.class-name,:root[theme=dark] :not([theme])>*>.markdown-body .token.constant,:root[theme=dark] :not([theme])>*>.markdown-body .token.property,:root[theme=dark] :not([theme])>*>.markdown-body .token.symbol,:root[theme] [theme=dark] .markdown-body .token.class-name,:root[theme] [theme=dark] .markdown-body .token.constant,:root[theme] [theme=dark] .markdown-body .token.property,:root[theme] [theme=dark] .markdown-body .token.symbol{color:#f8c555}:root[theme=dark] :not([theme])>*>.markdown-body .token.atrule,:root[theme=dark] :not([theme])>*>.markdown-body .token.builtin,:root[theme=dark] :not([theme])>*>.markdown-body .token.important,:root[theme=dark] :not([theme])>*>.markdown-body .token.keyword,:root[theme=dark] :not([theme])>*>.markdown-body .token.selector,:root[theme] [theme=dark] .markdown-body .token.atrule,:root[theme] [theme=dark] .markdown-body .token.builtin,:root[theme] [theme=dark] .markdown-body .token.important,:root[theme] [theme=dark] .markdown-body .token.keyword,:root[theme] [theme=dark] .markdown-body .token.selector{color:#cc99cd}:root[theme=dark] :not([theme])>*>.markdown-body .token.attr-value,:root[theme=dark] :not([theme])>*>.markdown-body .token.char,:root[theme=dark] :not([theme])>*>.markdown-body .token.regex,:root[theme=dark] :not([theme])>*>.markdown-body .token.string,:root[theme=dark] :not([theme])>*>.markdown-body .token.variable,:root[theme] [theme=dark] .markdown-body .token.attr-value,:root[theme] [theme=dark] .markdown-body .token.char,:root[theme] [theme=dark] .markdown-body .token.regex,:root[theme] [theme=dark] .markdown-body .token.string,:root[theme] [theme=dark] .markdown-body .token.variable{color:#7ec699}:root[theme=dark] :not([theme])>*>.markdown-body .token.entity,:root[theme=dark] :not([theme])>*>.markdown-body .token.operator,:root[theme=dark] :not([theme])>*>.markdown-body .token.url,:root[theme] [theme=dark] .markdown-body .token.entity,:root[theme] [theme=dark] .markdown-body .token.operator,:root[theme] [theme=dark] .markdown-body .token.url{color:#67cdcc}:root[theme=dark] :not([theme])>*>.markdown-body .token.bold,:root[theme=dark] :not([theme])>*>.markdown-body .token.important,:root[theme] [theme=dark] .markdown-body .token.bold,:root[theme] [theme=dark] .markdown-body .token.important{font-weight:700}:root[theme=dark] :not([theme])>*>.markdown-body .token.italic,:root[theme] [theme=dark] .markdown-body .token.italic{font-style:italic}:root[theme=dark] :not([theme])>*>.markdown-body .token.entity,:root[theme] [theme=dark] .markdown-body .token.entity{cursor:help}:root[theme=dark] :not([theme])>*>.markdown-body .token.inserted,:root[theme] [theme=dark] .markdown-body .token.inserted{color:green}:root[theme=light] :not([theme])>*>.markdown-body code[class*=language-],:root[theme=light] :not([theme])>*>.markdown-body pre[class*=language-],:root[theme] [theme=light] .markdown-body code[class*=language-],:root[theme] [theme=light] .markdown-body pre[class*=language-]{word-wrap:normal;background:none;color:#000;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;text-shadow:0 1px #fff;white-space:pre;word-break:normal;word-spacing:normal}:root[theme=light] :not([theme])>*>.markdown-body code[class*=language-] ::selection,:root[theme=light] :not([theme])>*>.markdown-body code[class*=language-]::selection,:root[theme=light] :not([theme])>*>.markdown-body pre[class*=language-] ::selection,:root[theme=light] :not([theme])>*>.markdown-body pre[class*=language-]::selection,:root[theme] [theme=light] .markdown-body code[class*=language-] ::selection,:root[theme] [theme=light] .markdown-body code[class*=language-]::selection,:root[theme] [theme=light] .markdown-body pre[class*=language-] ::selection,:root[theme] [theme=light] .markdown-body pre[class*=language-]::selection{background:#b3d4fc;text-shadow:none}:root[theme=light] :not([theme])>*>.markdown-body pre[class*=language-],:root[theme] [theme=light] .markdown-body pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:root[theme=light] :not([theme])>*>.markdown-body :not(pre)>code[class*=language-],:root[theme=light] :not([theme])>*>.markdown-body pre[class*=language-],:root[theme] [theme=light] .markdown-body :not(pre)>code[class*=language-],:root[theme] [theme=light] .markdown-body pre[class*=language-]{background:#f5f2f0}:root[theme=light] :not([theme])>*>.markdown-body :not(pre)>code[class*=language-],:root[theme] [theme=light] .markdown-body :not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}:root[theme=light] :not([theme])>*>.markdown-body .token.cdata,:root[theme=light] :not([theme])>*>.markdown-body .token.comment,:root[theme=light] :not([theme])>*>.markdown-body .token.doctype,:root[theme=light] :not([theme])>*>.markdown-body .token.prolog,:root[theme] [theme=light] .markdown-body .token.cdata,:root[theme] [theme=light] .markdown-body .token.comment,:root[theme] [theme=light] .markdown-body .token.doctype,:root[theme] [theme=light] .markdown-body .token.prolog{color:#708090}:root[theme=light] :not([theme])>*>.markdown-body .token.punctuation,:root[theme] [theme=light] .markdown-body .token.punctuation{color:#999}:root[theme=light] :not([theme])>*>.markdown-body .token.namespace,:root[theme] [theme=light] .markdown-body .token.namespace{opacity:.7}:root[theme=light] :not([theme])>*>.markdown-body .token.boolean,:root[theme=light] :not([theme])>*>.markdown-body .token.constant,:root[theme=light] :not([theme])>*>.markdown-body .token.deleted,:root[theme=light] :not([theme])>*>.markdown-body .token.number,:root[theme=light] :not([theme])>*>.markdown-body .token.property,:root[theme=light] :not([theme])>*>.markdown-body .token.symbol,:root[theme=light] :not([theme])>*>.markdown-body .token.tag,:root[theme] [theme=light] .markdown-body .token.boolean,:root[theme] [theme=light] .markdown-body .token.constant,:root[theme] [theme=light] .markdown-body .token.deleted,:root[theme] [theme=light] .markdown-body .token.number,:root[theme] [theme=light] .markdown-body .token.property,:root[theme] [theme=light] .markdown-body .token.symbol,:root[theme] [theme=light] .markdown-body .token.tag{color:#905}:root[theme=light] :not([theme])>*>.markdown-body .token.attr-name,:root[theme=light] :not([theme])>*>.markdown-body .token.builtin,:root[theme=light] :not([theme])>*>.markdown-body .token.char,:root[theme=light] :not([theme])>*>.markdown-body .token.inserted,:root[theme=light] :not([theme])>*>.markdown-body .token.selector,:root[theme=light] :not([theme])>*>.markdown-body .token.string,:root[theme] [theme=light] .markdown-body .token.attr-name,:root[theme] [theme=light] .markdown-body .token.builtin,:root[theme] [theme=light] .markdown-body .token.char,:root[theme] [theme=light] .markdown-body .token.inserted,:root[theme] [theme=light] .markdown-body .token.selector,:root[theme] [theme=light] .markdown-body .token.string{color:#690}:root[theme=light] :not([theme])>*>.markdown-body .language-css .token.string,:root[theme=light] :not([theme])>*>.markdown-body .style .token.string,:root[theme=light] :not([theme])>*>.markdown-body .token.entity,:root[theme=light] :not([theme])>*>.markdown-body .token.operator,:root[theme=light] :not([theme])>*>.markdown-body .token.url,:root[theme] [theme=light] .markdown-body .language-css .token.string,:root[theme] [theme=light] .markdown-body .style .token.string,:root[theme] [theme=light] .markdown-body .token.entity,:root[theme] [theme=light] .markdown-body .token.operator,:root[theme] [theme=light] .markdown-body .token.url{background:#ffffff80;color:#9a6e3a}:root[theme=light] :not([theme])>*>.markdown-body .token.atrule,:root[theme=light] :not([theme])>*>.markdown-body .token.attr-value,:root[theme=light] :not([theme])>*>.markdown-body .token.keyword,:root[theme] [theme=light] .markdown-body .token.atrule,:root[theme] [theme=light] .markdown-body .token.attr-value,:root[theme] [theme=light] .markdown-body .token.keyword{color:#07a}:root[theme=light] :not([theme])>*>.markdown-body .token.class-name,:root[theme=light] :not([theme])>*>.markdown-body .token.function,:root[theme] [theme=light] .markdown-body .token.class-name,:root[theme] [theme=light] .markdown-body .token.function{color:#dd4a68}:root[theme=light] :not([theme])>*>.markdown-body .token.important,:root[theme=light] :not([theme])>*>.markdown-body .token.regex,:root[theme=light] :not([theme])>*>.markdown-body .token.variable,:root[theme] [theme=light] .markdown-body .token.important,:root[theme] [theme=light] .markdown-body .token.regex,:root[theme] [theme=light] .markdown-body .token.variable{color:#e90}:root[theme=light] :not([theme])>*>.markdown-body .token.bold,:root[theme=light] :not([theme])>*>.markdown-body .token.important,:root[theme] [theme=light] .markdown-body .token.bold,:root[theme] [theme=light] .markdown-body .token.important{font-weight:700}:root[theme=light] :not([theme])>*>.markdown-body .token.italic,:root[theme] [theme=light] .markdown-body .token.italic{font-style:italic}:root[theme=light] :not([theme])>*>.markdown-body .token.entity,:root[theme] [theme=light] .markdown-body .token.entity{cursor:help}@media print{:root[theme=light] :not([theme])>*>.markdown-body code[class*=language-],:root[theme=light] :not([theme])>*>.markdown-body pre[class*=language-],:root[theme] [theme=light] .markdown-body code[class*=language-],:root[theme] [theme=light] .markdown-body pre[class*=language-]{text-shadow:none}}.markdown-body{word-wrap:break-word;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;font-size:16px;line-height:1.5}.markdown-body:after,.markdown-body:before{content:"";display:table}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;line-height:1;margin-left:-20px;padding-right:4px}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-bottom:16px;margin-top:0}.markdown-body hr{background-color:#e7e7e7;border:0;height:.25em;margin:24px 0;padding:0}.markdown-body blockquote{border-left:.25em solid #ddd;color:#777;font-size:16px;padding:0 1em}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body kbd,.popover kbd{background-color:#fcfcfc;border:1px solid;border-color:#ccc #ccc #bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb;color:#555;display:inline-block;font-size:11px;line-height:10px;padding:3px 5px;vertical-align:middle}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{font-weight:600;line-height:1.25;margin-bottom:16px;margin-top:24px}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#000;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{border-bottom:1px solid #eee;padding-bottom:.3em}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{color:#777;font-size:.85em}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{list-style-type:none;padding:0}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-bottom:0;margin-top:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{padding-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{font-size:1em;font-style:italic;font-weight:700;margin-top:16px;padding:0}.markdown-body dl dd{margin-bottom:16px;padding:0 16px}.markdown-body table{display:block;overflow:auto;width:100%;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{background-color:#fff;box-sizing:initial;max-width:100%}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{background-color:initial;max-width:none;vertical-align:text-top}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{border:1px solid #ddd;display:block;float:left;margin:13px 0 0;overflow:hidden;padding:7px;width:auto}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{clear:both;color:#333;display:block;padding:5px 0 0}.markdown-body span.align-center{clear:both;display:block;overflow:hidden}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{clear:both;display:block;overflow:hidden}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{background-color:#0000000a;border-radius:3px;font-size:85%;margin:0;padding:.2em 0}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{content:"\00a0";letter-spacing:-.2em}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{background:#0000;border:0;font-size:100%;margin:0;padding:0;white-space:pre;word-break:normal}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{border-radius:3px;font-size:85%;line-height:1.45;overflow:auto}.markdown-body:not(.next-editor) pre{padding:16px}.markdown-body pre code,.markdown-body pre tt{word-wrap:normal;background-color:initial;border:0;display:inline;line-height:inherit;margin:0;max-width:auto;overflow:visible;padding:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{font-size:12px;line-height:1;overflow:hidden;padding:5px;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{background:#fff;border:0;padding:10px 8px 9px;text-align:right}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{background:#f8f8f8;border-top:0;font-weight:700}.news .alert .markdown-body blockquote{border:0;padding:0 0 0 40px}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{cursor:default!important;float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle}.markdown-alert{border-left-style:solid;border-left-width:4px;color:inherit;margin-bottom:16px;padding:8px 16px}.markdown-alert .markdown-alert-title{align-items:center;display:flex;font-weight:500;line-height:1;white-space:break-spaces}.markdown-body .markdown-alert>*{margin-bottom:0;margin-top:16px}.markdown-body .markdown-alert .selection-popover,.markdown-body .markdown-alert>:first-child{margin-top:0}.markdown-alert.markdown-alert-note{border-left-color:var(--hmd-tw-state-info-default)}.markdown-alert.markdown-alert-note .markdown-alert-title{fill:currentColor;color:var(--hmd-tw-state-info-text)}.markdown-alert.markdown-alert-tip{border-left-color:var(--hmd-tw-state-success-default)}.markdown-alert.markdown-alert-tip .markdown-alert-title{fill:currentColor;color:var(--hmd-tw-state-success-text)}.markdown-alert.markdown-alert-important{border-left-color:var(--hmd-tw-border-primary-default)}.markdown-alert.markdown-alert-important .markdown-alert-title{fill:currentColor;color:var(--hmd-tw-text-primary)}.markdown-alert.markdown-alert-warning{border-left-color:var(--hmd-tw-state-warning-default)}.markdown-alert.markdown-alert-warning .markdown-alert-title{fill:currentColor;color:var(--hmd-tw-state-warning-text)}.markdown-alert.markdown-alert-caution{border-left-color:var(--hmd-tw-state-danger-default)}.markdown-alert.markdown-alert-caution .markdown-alert-title{fill:currentColor;color:var(--hmd-tw-state-danger-text)}:root[theme=dark] :not([theme])>*>.markdown-body,:root[theme] [theme=dark] .markdown-body{color:#d4d4d8}:root[theme=dark] :not([theme])>*>.markdown-body h1,:root[theme=dark] :not([theme])>*>.markdown-body h2,:root[theme] [theme=dark] .markdown-body h1,:root[theme] [theme=dark] .markdown-body h2{border-bottom-color:#52525b}:root[theme=dark] :not([theme])>*>.markdown-body h6,:root[theme] [theme=dark] .markdown-body h6{color:#a1a1aa}:root[theme=dark] :not([theme])>*>.markdown-body details,:root[theme] [theme=dark] .markdown-body details{background-color:#303036;color:#d4d4d8}:root[theme=dark] :not([theme])>*>.markdown-body details summary::marker:first-child,:root[theme] [theme=dark] .markdown-body details summary::marker:first-child{color:#d4d4d8}:root[theme=dark] :not([theme])>*>.markdown-body details:hover,:root[theme] [theme=dark] .markdown-body details:hover{background:#303036}:root[theme=dark] :not([theme])>*>.markdown-body details code,:root[theme=dark] :not([theme])>*>.markdown-body details[open]:hover,:root[theme] [theme=dark] .markdown-body details code,:root[theme] [theme=dark] .markdown-body details[open]:hover{background-color:#303036}:root[theme=dark] :not([theme])>*>.markdown-body hr,:root[theme] [theme=dark] .markdown-body hr{background-color:#52525b}:root[theme=dark] :not([theme])>*>.markdown-body blockquote,:root[theme] [theme=dark] .markdown-body blockquote{border-left-color:#71717a;color:#a1a1aa}:root[theme=dark] :not([theme])>*>.markdown-body blockquote a span,:root[theme] [theme=dark] .markdown-body blockquote a span{color:#9894f9}:root[theme=dark] :not([theme])>*>.markdown-body a.mention-anchor.user-card-popover,:root[theme] [theme=dark] .markdown-body a.mention-anchor.user-card-popover{background-color:#453aff26;color:#9894f9}:root[theme=dark] :not([theme])>*>.markdown-body ::selection,:root[theme] [theme=dark] .markdown-body ::selection{background-color:#453aff99}:root[theme=dark] :not([theme])>*>.markdown-body .alert.alert-info,:root[theme] [theme=dark] .markdown-body .alert.alert-info{background-color:#38bdf81a;border-left-color:#0ea5e9;color:#38bdf8}:root[theme=dark] :not([theme])>*>.markdown-body .alert.alert-warning,:root[theme] [theme=dark] .markdown-body .alert.alert-warning{background-color:#fbbf241a;border-left-color:#f59e0b;color:#f59e0b}:root[theme=dark] :not([theme])>*>.markdown-body .alert.alert-success,:root[theme] [theme=dark] .markdown-body .alert.alert-success{background-color:#6db19d26;border-left-color:#55b685;color:#6db19d}:root[theme=dark] :not([theme])>*>.markdown-body .alert.alert-danger,:root[theme] [theme=dark] .markdown-body .alert.alert-danger{background-color:#ef444433;border-left-color:#ef4444;color:#f87171}:root[theme=dark] :not([theme])>*>.markdown-body .mark,:root[theme=dark] :not([theme])>*>.markdown-body mark,:root[theme] [theme=dark] .markdown-body .mark,:root[theme] [theme=dark] .markdown-body mark{background-color:#fbbf241a;color:#f59e0b}:root[theme=dark] :not([theme])>*>.markdown-body .mark span,:root[theme=dark] :not([theme])>*>.markdown-body mark span,:root[theme] [theme=dark] .markdown-body .mark span,:root[theme] [theme=dark] .markdown-body mark span{color:#fbbf24}:root[theme=dark] :not([theme])>*>.markdown-body .highlight pre,:root[theme=dark] :not([theme])>*>.markdown-body pre,:root[theme] [theme=dark] .markdown-body .highlight pre,:root[theme] [theme=dark] .markdown-body pre{background-color:#303036;color:#a1a1aa}:root[theme=dark] :not([theme])>*>.markdown-body .style .token.string,:root[theme=dark] :not([theme])>*>.markdown-body .token.entity,:root[theme=dark] :not([theme])>*>.markdown-body .token.operator,:root[theme=dark] :not([theme])>*>.markdown-body .token.url,:root[theme=dark] :not([theme])>*>.markdown-body.language-css,:root[theme=dark] :not([theme])>*>.markdown-body.token.string,:root[theme] [theme=dark] .markdown-body .style .token.string,:root[theme] [theme=dark] .markdown-body .token.entity,:root[theme] [theme=dark] .markdown-body .token.operator,:root[theme] [theme=dark] .markdown-body .token.url,:root[theme] [theme=dark] .markdown-body.language-css,:root[theme] [theme=dark] .markdown-body.token.string{background:none}:root[theme=dark] :not([theme])>*>.markdown-body :not(pre)>code,:root[theme] [theme=dark] .markdown-body :not(pre)>code{background-color:#3f3f46}:root[theme=dark] :not([theme])>*>.markdown-body code .hljs-tag,:root[theme] [theme=dark] .markdown-body code .hljs-tag{color:#d4d4d8}:root[theme=dark] :not([theme])>*>.markdown-body code .hljs-keyword,:root[theme=dark] :not([theme])>*>.markdown-body code .hljs-selector-tag,:root[theme=dark] :not([theme])>*>.markdown-body code .hljs-type,:root[theme=dark] :not([theme])>*>.markdown-body code .token.boolean,:root[theme=dark] :not([theme])>*>.markdown-body code .token.constant,:root[theme=dark] :not([theme])>*>.markdown-body code .token.deleted,:root[theme=dark] :not([theme])>*>.markdown-body code .token.number,:root[theme=dark] :not([theme])>*>.markdown-body code .token.property,:root[theme=dark] :not([theme])>*>.markdown-body code .token.symbol,:root[theme=dark] :not([theme])>*>.markdown-body code .token.tag,:root[theme] [theme=dark] .markdown-body code .hljs-keyword,:root[theme] [theme=dark] .markdown-body code .hljs-selector-tag,:root[theme] [theme=dark] .markdown-body code .hljs-type,:root[theme] [theme=dark] .markdown-body code .token.boolean,:root[theme] [theme=dark] .markdown-body code .token.constant,:root[theme] [theme=dark] .markdown-body code .token.deleted,:root[theme] [theme=dark] .markdown-body code .token.number,:root[theme] [theme=dark] .markdown-body code .token.property,:root[theme] [theme=dark] .markdown-body code .token.symbol,:root[theme] [theme=dark] .markdown-body code .token.tag{color:#ff70b4}:root[theme=dark] :not([theme])>*>.markdown-body code .hljs-attribute,:root[theme=dark] :not([theme])>*>.markdown-body code .hljs-bullet,:root[theme=dark] :not([theme])>*>.markdown-body code .hljs-literal,:root[theme=dark] :not([theme])>*>.markdown-body code .hljs-number,:root[theme=dark] :not([theme])>*>.markdown-body code .hljs-symbol,:root[theme=dark] :not([theme])>*>.markdown-body code .token.atrule,:root[theme=dark] :not([theme])>*>.markdown-body code .token.attr-value,:root[theme=dark] :not([theme])>*>.markdown-body code .token.keyword,:root[theme] [theme=dark] .markdown-body code .hljs-attribute,:root[theme] [theme=dark] .markdown-body code .hljs-bullet,:root[theme] [theme=dark] .markdown-body code .hljs-literal,:root[theme] [theme=dark] .markdown-body code .hljs-number,:root[theme] [theme=dark] .markdown-body code .hljs-symbol,:root[theme] [theme=dark] .markdown-body code .token.atrule,:root[theme] [theme=dark] .markdown-body code .token.attr-value,:root[theme] [theme=dark] .markdown-body code .token.keyword{color:#9894f9}:root[theme=dark] :not([theme])>*>.markdown-body pre.part.plugin-rendered,:root[theme] [theme=dark] .markdown-body pre.part.plugin-rendered{background-color:#fff;color:#000}:root[theme=dark] :not([theme])>*>.markdown-body table,:root[theme] [theme=dark] .markdown-body table{border-color:#52525b}:root[theme=dark] :not([theme])>*>.markdown-body table thead tr,:root[theme] [theme=dark] .markdown-body table thead tr{background-color:#303036;border-bottom-color:#52525b}:root[theme=dark] :not([theme])>*>.markdown-body table td,:root[theme=dark] :not([theme])>*>.markdown-body table th,:root[theme] [theme=dark] .markdown-body table td,:root[theme] [theme=dark] .markdown-body table th{border-left-color:#52525b;border-top-color:#52525b}:root[theme=dark] :not([theme])>*>.markdown-body table tbody tr,:root[theme=dark] :not([theme])>*>.markdown-body table tr:nth-child(2n),:root[theme] [theme=dark] .markdown-body table tbody tr,:root[theme] [theme=dark] .markdown-body table tr:nth-child(2n){background-color:#27272a}:root[theme=light] :not([theme])>*>.markdown-body,:root[theme] [theme=light] .markdown-body{color:#3f3f46}:root[theme=light] :not([theme])>*>.markdown-body h1,:root[theme=light] :not([theme])>*>.markdown-body h2,:root[theme] [theme=light] .markdown-body h1,:root[theme] [theme=light] .markdown-body h2{border-bottom-color:#e4e4e7}:root[theme=light] :not([theme])>*>.markdown-body h6,:root[theme] [theme=light] .markdown-body h6{color:#71717a}:root[theme=light] :not([theme])>*>.markdown-body iframe,:root[theme] [theme=light] .markdown-body iframe{border:1px solid #e4e4e7;box-sizing:border-box}:root[theme=light] :not([theme])>*>.markdown-body details,:root[theme] [theme=light] .markdown-body details{background-color:#f4f4f5}:root[theme=light] :not([theme])>*>.markdown-body details:hover,:root[theme] [theme=light] .markdown-body details:hover{background:#e4e4e7}:root[theme=light] :not([theme])>*>.markdown-body details[open]:hover,:root[theme] [theme=light] .markdown-body details[open]:hover{background-color:#f4f4f5}:root[theme=light] :not([theme])>*>.markdown-body details code,:root[theme] [theme=light] .markdown-body details code{background-color:#e4e4e7}:root[theme=light] :not([theme])>*>.markdown-body hr,:root[theme] [theme=light] .markdown-body hr{background-color:#d4d4d8}:root[theme=light] :not([theme])>*>.markdown-body blockquote,:root[theme] [theme=light] .markdown-body blockquote{border-left-color:#e4e4e7;color:#71717a}:root[theme=light] :not([theme])>*>.markdown-body blockquote a span,:root[theme] [theme=light] .markdown-body blockquote a span{color:#564dff}:root[theme=light] :not([theme])>*>.markdown-body a.mention-anchor.user-card-popover,:root[theme] [theme=light] .markdown-body a.mention-anchor.user-card-popover{background-color:#ecebfe;color:#564dff}:root[theme=light] :not([theme])>*>.markdown-body ::selection,:root[theme] [theme=light] .markdown-body ::selection{background-color:#cccafc}:root[theme=light] :not([theme])>*>.markdown-body .alert.alert-info,:root[theme] [theme=light] .markdown-body .alert.alert-info{background-color:#e0f2fe;border-left-color:#0284c7;color:#0284c7}:root[theme=light] :not([theme])>*>.markdown-body .alert.alert-warning,:root[theme] [theme=light] .markdown-body .alert.alert-warning{background-color:#fef3c799;border-left-color:#f59e0b;color:#f59e0b}:root[theme=light] :not([theme])>*>.markdown-body .alert.alert-success,:root[theme] [theme=light] .markdown-body .alert.alert-success{background-color:#d9f9e5;border-left-color:#43946c;color:#43946c}:root[theme=light] :not([theme])>*>.markdown-body .alert.alert-danger,:root[theme] [theme=light] .markdown-body .alert.alert-danger{background-color:#fee2e299;border-left-color:#ef4444;color:#ef4444}:root[theme=light] :not([theme])>*>.markdown-body .mark,:root[theme=light] :not([theme])>*>.markdown-body mark,:root[theme] [theme=light] .markdown-body .mark,:root[theme] [theme=light] .markdown-body mark{background-color:#fef3c799;color:#f59e0b}:root[theme=light] :not([theme])>*>.markdown-body .mark span,:root[theme=light] :not([theme])>*>.markdown-body mark span,:root[theme] [theme=light] .markdown-body .mark span,:root[theme] [theme=light] .markdown-body mark span{color:#f59e0b}:root[theme=light] :not([theme])>*>.markdown-body .highlight pre,:root[theme=light] :not([theme])>*>.markdown-body pre,:root[theme] [theme=light] .markdown-body .highlight pre,:root[theme] [theme=light] .markdown-body pre{background-color:#f4f4f5}:root[theme=light] :not([theme])>*>.markdown-body pre.part.plugin-rendered,:root[theme] [theme=light] .markdown-body pre.part.plugin-rendered{background-color:inherit;color:inherit}:root[theme=light] :not([theme])>*>.markdown-body :not(pre)>code,:root[theme] [theme=light] .markdown-body :not(pre)>code{background-color:#0000000a}:root[theme=light] :not([theme])>*>.markdown-body table,:root[theme] [theme=light] .markdown-body table{border-color:#e4e4e7}:root[theme=light] :not([theme])>*>.markdown-body table thead tr,:root[theme] [theme=light] .markdown-body table thead tr{background-color:#f4f4f5;border-bottom-color:#d4d4d8}:root[theme=light] :not([theme])>*>.markdown-body table td,:root[theme=light] :not([theme])>*>.markdown-body table th,:root[theme] [theme=light] .markdown-body table td,:root[theme] [theme=light] .markdown-body table th{border-left-color:#e4e4e7;border-top-color:#e4e4e7}:root[theme=light] :not([theme])>*>.markdown-body table tbody tr,:root[theme=light] :not([theme])>*>.markdown-body table tr:nth-child(2n),:root[theme] [theme=light] .markdown-body table tbody tr,:root[theme] [theme=light] .markdown-body table tr:nth-child(2n){background-color:#fdfdfd}.markdown-body{font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;max-width:758px;overflow:visible!important;padding-bottom:40px;padding-top:40px;position:relative}.markdown-body>*{max-width:100%}.markdown-body .alert a,.markdown-body a{color:var(--hmd-tw-link-text-default)}.markdown-body .alert a:focus,.markdown-body .alert a:hover,.markdown-body a:focus,.markdown-body a:hover{color:var(--hmd-tw-link-text-hover)}.markdown-body .alert a:hover,.markdown-body a:hover{text-decoration-thickness:2px;text-underline-offset:4px}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5{font-family:Readex Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;font-weight:700}.markdown-body h1,.markdown-body h2{border-bottom:1px solid}.markdown-body iframe,.markdown-body img{background-color:initial;border-radius:6px;margin:.5rem 0}.markdown-body iframe{max-width:100%;width:728px}.markdown-body details{border-radius:4px;margin-bottom:.5rem;padding:.5rem 1rem}.markdown-body details:hover{transition:all .1s}.markdown-body details summary+p{margin-top:.5rem}.markdown-body details p:last-child{margin-bottom:0}.markdown-body hr{height:2px}.markdown-body img.emoji{border:none;height:20px;vertical-align:middle;width:20px}.markdown-body li small{color:#a1a1aa}.markdown-body blockquote{border-left:3px solid}.markdown-body blockquote .small,.markdown-body blockquote small,.markdown-body li small{display:initial;font-size:85%}.markdown-body a.mention-anchor:before{content:"";margin-right:0}.markdown-body a.mention-anchor.user-card-popover{border-radius:4px;padding:1px 4px}.markdown-body .alert{border:none;border-radius:4px;margin-top:10px}.markdown-body .alert h2,.markdown-body .alert h3,.markdown-body .alert h4,.markdown-body .alert h5,.markdown-body .alert h6{margin-top:0}.markdown-body .alert h2{border:none}.markdown-body .alert.alert-danger,.markdown-body .alert.alert-info,.markdown-body .alert.alert-success,.markdown-body .alert.alert-warning{border-left:3px solid}.markdown-body .highlight pre,.markdown-body .mark,.markdown-body mark,.markdown-body pre{border-radius:4px}.markdown-body pre.part.abc,.markdown-body pre.part.flow-chart,.markdown-body pre.part.fretboard,.markdown-body pre.part.graphviz,.markdown-body pre.part.mermaid,.markdown-body pre.part.sequence-diagram,.markdown-body pre.part.vega-embed{border-radius:4px;max-width:100%;overflow:auto}.markdown-body table{border:1px solid;border-radius:4px;width:fit-content}.markdown-body table thead tr{border-bottom:1px solid;border-top:none}.markdown-body table tbody tr,.markdown-body table thead tr th{border-top:none}.markdown-body table tbody tr td:first-child,.markdown-body table thead,.markdown-body table thead th:first-child{border-left:none}.markdown-body table td,.markdown-body table th{border:1px solid;border-bottom:none;border-right:none;padding:6px 13px}.markdown-body.next-editor{overflow-x:hidden!important}.markdown-body pre{border:inherit}.markdown-body code{color:inherit}html[lang^=ja] .markdown-body code code,html[lang^=ja] .markdown-body code kbd,html[lang^=ja] .markdown-body code pre{font-family:Source Code Pro,Consolas,monaco,Meiryo,ＭＳ ゴシック,MS Gothic,monospace}html[lang=zh-tw] .markdown-body code code,html[lang=zh-tw] .markdown-body code kbd,html[lang=zh-tw] .markdown-body code pre{font-family:Source Code Pro,Consolas,monaco,Microsoft JhengHei,微軟正黑,monospace}html[lang=zh-cn] .markdown-body code code,html[lang=zh-cn] .markdown-body code kbd,html[lang=zh-cn] .markdown-body code pre{font-family:Source Code Pro,Consolas,monaco,Microsoft YaHei,微软雅黑,monospace}html .markdown-body code[lang^=ja] code,html .markdown-body code[lang^=ja] kbd,html .markdown-body code[lang^=ja] pre{font-family:Source Code Pro,Consolas,monaco,Meiryo,ＭＳ ゴシック,MS Gothic,monospace}html .markdown-body code[lang=zh-tw] code,html .markdown-body code[lang=zh-tw] kbd,html .markdown-body code[lang=zh-tw] pre{font-family:Source Code Pro,Consolas,monaco,Microsoft JhengHei,微軟正黑,monospace}html .markdown-body code[lang=zh-cn] code,html .markdown-body code[lang=zh-cn] kbd,html .markdown-body code[lang=zh-cn] pre{font-family:Source Code Pro,Consolas,monaco,Microsoft YaHei,微软雅黑,monospace}.markdown-body pre code .wrapper{display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{border-right:2px solid #766df8;box-sizing:initial;color:#a1a1aa;cursor:default;display:inline-block;min-width:20px;padding:0 8px 0 0;position:relative;text-align:right;z-index:4}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-bottom:none;border-left:none;border-top:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-collapse:inherit!important;border-spacing:0}.markdown-body code[data-gist-id]{background:none;padding:0}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{margin-bottom:unset;overflow:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert{display:flex;flex-direction:column;gap:16px}.markdown-body .alert>*{margin:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{background-color:inherit;border-radius:0;overflow:visible;text-align:center;white-space:inherit}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{height:100%;max-width:100%}.markdown-body pre>code.wrap{word-wrap:break-word;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap}.markdown-body pre.pseudocode{white-space-collapse:collapse}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body .mark,.markdown-body mark{background-color:#fff1a7}:root[theme] .markdown-body{line-height:1.75}:root[theme] .markdown-body ::marker,:root[theme] .markdown-body code{color:var(--hmd-tw-text-default)}:root[theme] .markdown-body h1,:root[theme] .markdown-body h2,:root[theme] .markdown-body h3,:root[theme] .markdown-body h4,:root[theme] .markdown-body h5,:root[theme] .markdown-body h6{overflow:visible}:root[theme] .markdown-body h1 .octicon-link,:root[theme] .markdown-body h2 .octicon-link,:root[theme] .markdown-body h3 .octicon-link,:root[theme] .markdown-body h4 .octicon-link,:root[theme] .markdown-body h5 .octicon-link,:root[theme] .markdown-body h6 .octicon-link{color:var(--hmd-tw-text-subtle)}:root[theme] .markdown-body .anchor{left:0;margin-left:0;position:absolute}:root[theme] .markdown-body .gist table{border-color:inherit}:root[theme] .markdown-body .gist table thead tr{background-color:inherit;border-bottom-color:inherit}:root[theme] .markdown-body .gist table td,:root[theme] .markdown-body .gist table th{border-left-color:inherit;border-top-color:inherit}:root[theme] .markdown-body .gist table tbody tr,:root[theme] .markdown-body .gist table tr:nth-child(2n){background-color:inherit}:root[theme] .markdown-body ol ol,:root[theme] .markdown-body ol ul,:root[theme] .markdown-body ul ol,:root[theme] .markdown-body ul ul{margin-bottom:12px;margin-top:6px}@media (max-width:767px){.markdown-body h1{font-size:1.6em}.markdown-body h2{font-size:1.4em}.markdown-body h3{font-size:1.125em}}.vimeo,.youtube{background-color:#000;background-position:50%;background-repeat:no-repeat;background-size:contain;cursor:pointer;display:table;overflow:hidden;text-align:center}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{object-fit:contain;width:100%;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{height:100%;left:0;position:absolute;top:0;width:100%}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{color:#fff;height:auto;left:50%;opacity:.3;position:absolute;top:50%;transform:translate(-50%,-50%);transition:opacity .2s;width:auto;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{bottom:0;height:100%;left:0;position:absolute;right:0;top:0;width:100%}.figma{display:table;padding-bottom:56.25%;position:relative;width:100%}.figma iframe{border:1px solid #eee;bottom:0;height:100%;left:0;position:absolute;right:0;top:0;width:100%}.markmap-container{height:300px}.markmap-container>svg{height:100%;width:100%}.MJX_Assistive_MathML{display:none}#MathJax_Message{z-index:1000!important}.ui-infobar{color:var(--hmd-tw-text-default);font-size:14px;margin:25px auto -25px;max-width:760px;position:relative;z-index:2}.ui-infobar .ui-user-icon.small{height:18px;margin:2px;vertical-align:top;width:18px}.toc .invisable-node{list-style-type:none}.ui-toc{bottom:20px;position:fixed;z-index:998}.ui-toc.both-mode{margin-left:2px}.ui-toc.both-mode .ui-toc-label{border-bottom-left-radius:0;border-top-left-radius:0;height:40px;padding:10px 4px}:root[theme=light] :not([theme])>*>.ui-toc .ui-toc-label,:root[theme] [theme=light] .ui-toc-label{background-color:#fdfdfd;border-color:#d4d4d8;color:#a1a1aa}:root[theme=light] :not([theme])>*>.ui-toc .ui-toc-label:active,:root[theme=light] :not([theme])>*>.ui-toc .ui-toc-label:hover,:root[theme] [theme=light] .ui-toc-label:active,:root[theme] [theme=light] .ui-toc-label:hover{background-color:#f4f4f5;border-color:#d4d4d8;color:#a1a1aa}:root[theme=dark] :not([theme])>*>.ui-toc .ui-toc-label,:root[theme=dark] :not([theme])>*>.ui-toc .ui-toc-label:active,:root[theme=dark] :not([theme])>*>.ui-toc .ui-toc-label:hover,:root[theme] [theme=dark] .ui-toc-label,:root[theme] [theme=dark] .ui-toc-label:active,:root[theme] [theme=dark] .ui-toc-label:hover{background-color:#303036;border-color:#52525b;color:#a1a1aa}:root[theme=dark] :not([theme])>*>.ui-toc.both-mode .ui-toc-label,:root[theme] [theme=dark] .ui-toc.both-mode .ui-toc-label{background-color:#303036;border-color:#3f3f46;color:#d4d4d8}:root[theme=dark] :not([theme])>*>.ui-toc.both-mode .ui-toc-label:hover,:root[theme] [theme=dark] .ui-toc.both-mode .ui-toc-label:hover{background-color:#52525b}.ui-toc-label{border:1px solid;transition:opacity .2s}.ui-toc .open .ui-toc-label,.ui-toc-label:hover{opacity:1;transition:opacity .2s}.ui-toc-dropdown{letter-spacing:normal;margin-bottom:20px;margin-top:20px;max-height:70vh;max-width:45vw;overflow:auto;padding-left:10px;padding-right:10px;text-align:inherit;width:25vw}.ui-toc-dropdown.dropdown-menu{box-shadow:0 3px 15px 0 #00000026}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{letter-spacing:.0029em;padding-right:0}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{color:var(--hmd-tw-text-subtle);display:block;font-size:12px;font-weight:500;line-height:16px;padding:4px 20px}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{background-color:initial;border-color:var(--hmd-tw-border-bold);border-style:solid;border-width:0 0 0 1px;color:#000;color:var(--hmd-tw-text-emphasize);padding-left:19px;text-decoration:none}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{border-left:none;border-right:1px solid #000;padding-right:19px}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{background-color:initial;border-color:var(--hmd-tw-border-bold);border-style:solid;border-width:0 0 0 2px;color:var(--hmd-tw-text-emphasize);font-weight:600;padding-left:18px}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{border-width:0 2px 0 medium;border-left:0;border-color:var(--hmd-tw-border-bold);border-style:solid;padding-right:18px}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{font-size:12px;font-weight:400;padding-bottom:1px;padding-left:30px;padding-top:1px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{font-size:12px;font-weight:400;padding-bottom:1px;padding-left:40px;padding-top:1px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{font-weight:500;padding-left:28px}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{font-weight:500;padding-left:38px}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.ui-affix-toc{max-height:70vh;max-width:15vw;overflow:auto;position:fixed;top:0}.back-to-top,.expand-toggle,.go-to-bottom{color:var(--hmd-tw-text-subtle);display:block;font-size:12px;font-weight:500;line-height:16px;margin-left:10px;margin-top:10px;padding:2px 10px}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:var(--hmd-tw-text-primary);text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{background-position:50%;background-repeat:no-repeat;background-size:cover;border-radius:50%;display:block;height:20px;margin-bottom:2px;margin-right:5px;margin-top:2px;width:20px}.ui-user-icon.small{display:inline-block;height:18px;margin:0 0 .2em;vertical-align:middle;width:18px}.ui-infobar>small>span{line-height:22px}.ui-infobar>small .dropdown{display:inline-block}.ui-infobar>small .dropdown a:focus,.ui-infobar>small .dropdown a:hover{text-decoration:none}.ui-more-info{cursor:pointer;vertical-align:middle}.ui-connectedGithub{line-height:23px;white-space:nowrap}.ui-connectedGithub a.file-path{text-decoration:none}.ui-connectedGithub a.file-path:active,.ui-connectedGithub a.file-path:hover{text-decoration:underline}.unselectable{-webkit-user-select:none;-o-user-select:none;user-select:none}.selectable{-webkit-user-select:text;-o-user-select:text;user-select:text}.inline-spoiler-section{cursor:pointer}.inline-spoiler-section .spoiler-text{background-color:#333;border-radius:2px}.inline-spoiler-section .spoiler-text>*{opacity:0}.inline-spoiler-section .spoiler-img{filter:blur(10px)}.inline-spoiler-section.raw{background-color:#333;border-radius:2px}.inline-spoiler-section.raw>*{opacity:0}.inline-spoiler-section.unveil{cursor:auto}.inline-spoiler-section.unveil .spoiler-text{background-color:#3333331a}.inline-spoiler-section.unveil .spoiler-text>*{opacity:1}.inline-spoiler-section.unveil .spoiler-img{filter:none}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{color:#222;position:relative;z-index:1}.markdown-body.slides:before{background-color:currentColor;bottom:0;box-shadow:0 0 0 50vw;content:"";display:block;left:0;position:absolute;right:0;top:0;z-index:-1}.markdown-body.slides section[data-markdown]{background-color:#fff;margin-bottom:1.5em;position:relative;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{left:1em;max-height:100%;overflow:hidden;position:absolute;right:1em;top:50%;transform:translateY(-50%)}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{border:3px solid #777;content:"";height:1.5em;position:absolute;right:1em;top:-1.5em}.site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,sans-serif}html[lang^=ja] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif}html[lang=zh-tw] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}html[lang^=ja] body{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif}html[lang=zh-tw] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}abbr[data-original-title],abbr[title]{cursor:help}body.modal-open{overflow-y:auto;padding-right:0!important}svg{text-shadow:none}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h1 id="CSCE-838-Internet-Of-Things-Lab-4-Report" data-id="CSCE-838-Internet-Of-Things-Lab-4-Report"><a class="anchor hidden-xs" href="#CSCE-838-Internet-Of-Things-Lab-4-Report" title="CSCE-838-Internet-Of-Things-Lab-4-Report"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>CSCE 838 Internet Of Things Lab 4 Report</span></h1><h3 id="Group-Members" data-id="Group-Members"><a class="anchor hidden-xs" href="#Group-Members" title="Group-Members"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Group Members:</span></h3><ul>
+<li><span>Member 1: Anirudh Tangellapalli</span></li>
+<li><span>Member 2: Matthew Donsig</span></li>
+<li><span>Member 3: Audrey Vazzana</span></li>
+<li><span>Member 4: Apala Pramanik</span></li>
+</ul><h2 id="Table-of-Contents" data-id="Table-of-Contents"><a class="anchor hidden-xs" href="#Table-of-Contents" title="Table-of-Contents"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Table of Contents</span></h2><ol style="padding-left: 2em;">
+<li><a href="#introduction"><span>Introduction</span></a></li>
+<li><a href="#procedure"><span>Procedure</span></a>
+<ol style="padding-left: 2em;">
+<li><a href="#setting-up-iot-hub"><span>Setting up IoT Hub</span></a></li>
+<li><a href="#merging-lmic-example-with-previous-lab-code"><span>Merging LMIC Example with Previous Lab Code</span></a></li>
+<li><a href="#packet-structure-and-gateway-setup"><span>Packet Structure and Gateway Setup</span></a></li>
+<li><a href="#resources-and-acknowledgments"><span>Resources and Acknowledgments</span></a></li>
+<li><a href="#troubleshooting"><span>Troubleshooting</span></a></li>
+</ol>
+</li>
+<li><a href="#results"><span>Results</span></a>
+<ol style="padding-left: 2em;">
+<li><a href="#code-snippets"><span>Code Snippets</span></a></li>
+<li><a href="#serial-monitor-outputs"><span>Serial Monitor Outputs</span></a></li>
+<li><a href="#azure-cloud-screenshots-and-json-file"><span>Azure Cloud Screenshots and JSON File</span></a></li>
+</ol>
+</li>
+<li><a href="#testing"><span>Testing</span></a></li>
+<li><a href="#appendix"><span>Appendix</span></a></li>
+</ol><h2 id="Introduction" data-id="Introduction"><a class="anchor hidden-xs" href="#Introduction" title="Introduction"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Introduction</span></h2><p><span>In this lab, we aim to set up a LoRa-based communication system, leveraging hardware components like the SparkFun Pro RF and the SparkFun ESP32 1-Channel Gateway. LoRa (Long Range) technology allows low-power, wide-area communication between devices, making it an excellent choice for IoT applications. The SparkFun Pro RF will serve as the end device, sending messages, while the ESP32-based 1-Channel Gateway acts as the bridge between the LoRa network and the cloud via WiFi.</span></p><p><span>We explore how to install the necessary software libraries, configure the hardware, and establish communication between the gateway and a cloud service, Microsoft Azure IoT Hub. This lab demonstrates real-world IoT development by combining hardware setup, cloud service integration, and wireless data transmission.</span></p><h2 id="Development-Process" data-id="Development-Process"><a class="anchor hidden-xs" href="#Development-Process" title="Development-Process"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Development Process</span></h2><h3 id="Setting-up-IoT-Hub" data-id="Setting-up-IoT-Hub"><a class="anchor hidden-xs" href="#Setting-up-IoT-Hub" title="Setting-up-IoT-Hub"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Setting up IoT Hub</span></h3><p><span>The lab is divided into three primary stages:</span></p><ol style="padding-left: 2em;">
+<li>
+<p><strong><span>Setting up the LoRa Gateway (ESP32 1-Channel Gateway)</span></strong><span>:</span></p>
+<ul>
+<li><span>First, we install the necessary software on the SparkFun ESP32 Things board, which includes the ESP32 Arduino Core.</span></li>
+<li><span>After installing the core, the board is configured to act as a gateway, capable of connecting to the NU-IoT network through WiFi and communicating via LoRa. We also download the modified ESP 1-ch Gateway code (version 5) and adjust several settings for proper functionality.</span></li>
+</ul>
+</li>
+<li>
+<p><strong><span>Configuring Azure IoT Hub for Cloud Communication</span></strong><span>:</span></p>
+<ul>
+<li><span>Once the gateway is configured, the next step involves setting up an Azure IoT Hub, which will serve as the cloud platform for receiving and processing data. We create a student account on Azure, set up the IoT Hub, and link it to our gateway by modifying the code to include the IoT device’s connection string.</span></li>
+</ul>
+</li>
+<li>
+<p><strong><span>Setting Up the End Device (SparkFun Pro RF)</span></strong><span>:</span></p>
+<ul>
+<li><span>Finally, we configure the SparkFun Pro RF to act as the end device by installing the LMIC (LoraMAC-in-C) library. The device will transmit data using LoRa, and the messages will be relayed to the Azure cloud through the gateway.</span></li>
+</ul>
+</li>
+</ol><p><span>Here are the screenshots showing the process for each team member:</span></p><ul>
+<li>
+<p><strong><span>Anirudh:</span></strong><br>
+<span>Serial Monitor Results from "Hello World" code</span><br>
+<img src="https://hackmd.io/_uploads/S1gXgcE1yx.png" alt="ani_serialmon" class="offline-handled error-handled" loading="lazy"></p>
+<p><span>Azure Stream Analytics Query Output</span><br>
+<img src="https://hackmd.io/_uploads/SyqXgcNy1e.png" alt="ani_azure" class="offline-handled error-handled" loading="lazy"></p>
+</li>
+<li>
+<p><strong><span>Mathew:</span></strong><br>
+<span>Serial Monitor Results from "Hello World" code</span><br>
+<img src="https://hackmd.io/_uploads/HJ_YJ941kl.png" alt="Matthew_Hello_TX" class="offline-handled error-handled" loading="lazy"><br>
+<span>Azure Stream Analytics Query Output</span><br>
+<img src="https://hackmd.io/_uploads/Skho15Ny1l.png" alt="Matthew_Hello_World" class="offline-handled error-handled" loading="lazy"></p>
+</li>
+<li>
+<p><strong><span>Audrey:</span></strong><br>
+<span>Serial Monitor Results from "Hello World" code</span><br>
+<img src="https://hackmd.io/_uploads/ryjFx5Nyyx.png" alt="aud_serial_mon" class="offline-handled error-handled" loading="lazy"></p>
+<p><span>Azure Stream Analytics Query Output</span><br>
+<img src="https://hackmd.io/_uploads/B1_Ig94kyl.png" alt="lab4thing" class="offline-handled error-handled" loading="lazy"></p>
+</li>
+<li>
+<p><strong><span>Apala:</span></strong><br>
+<span>Serial Monitor Results from "Hello World" code</span><br>
+<img src="https://hackmd.io/_uploads/Skbrk5N11l.png" alt="serial_mon" class="offline-handled error-handled" loading="lazy"></p>
+<p><span>Azure Stream Analytics Query Output</span><br>
+<img src="https://hackmd.io/_uploads/rJvSRtEkJx.png" alt="azure" class="offline-handled error-handled" loading="lazy"></p>
+</li>
+</ul><h3 id="Merging-LMIC-Example-with-Previous-Lab-Code" data-id="Merging-LMIC-Example-with-Previous-Lab-Code"><a class="anchor hidden-xs" href="#Merging-LMIC-Example-with-Previous-Lab-Code" title="Merging-LMIC-Example-with-Previous-Lab-Code"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Merging LMIC Example with Previous Lab Code</span></h3><p><span>We merged the LMIC packet transmission example with the code developed in Lab 3:</span></p><ol style="padding-left: 2em;">
+<li><strong><span>Remove Radio Operations:</span></strong><span> Removed radio transmission code from Lab 3.</span></li>
+<li><strong><span>Insert LMIC Code:</span></strong><span> Integrated the LMIC library and utilized its packet transmission functionality.</span></li>
+<li><strong><span>Maintain Packet Structure:</span></strong><span> Preserved the structure of packets from Lab 3, ensuring compatibility with LMIC.</span></li>
+<li><strong><span>Average Temperature Reading:</span></strong><span> Reused the temperature reading module from Lab 3 to prepare the data for transmission.</span></li>
+</ol><h3 id="Packet-Structure-and-Gateway-Setup" data-id="Packet-Structure-and-Gateway-Setup"><a class="anchor hidden-xs" href="#Packet-Structure-and-Gateway-Setup" title="Packet-Structure-and-Gateway-Setup"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Packet Structure and Gateway Setup</span></h3><ol style="padding-left: 2em;">
+<li><span>The packet structure was adjusted in the gateway to format data into JSON.</span></li>
+<li><span>The packets containing temperature sensor data were sent to the Azure cloud every 60 seconds using </span><code>LMIC's TX_INTERVAL</code><span>.</span></li>
+</ol><p><strong><span>Gateway JSON Packet Example:</span></strong></p><pre><code class="json hljs"><span class="token punctuation">{</span>
+  <span class="token string">"Name"</span><span class="token punctuation">,</span>
+  <span class="token string">"NodeID"</span><span class="token punctuation">,</span>
+  <span class="token string">"Pack counter"</span><span class="token punctuation">,</span>
+  <span class="token string">"Timestamp"</span><span class="token punctuation">,</span>
+  <span class="token string">"AverageTemperature"</span>
+<span class="token punctuation">}</span>
+</code></pre><h3 id="Resources-and-Acknowledgments" data-id="Resources-and-Acknowledgments"><a class="anchor hidden-xs" href="#Resources-and-Acknowledgments" title="Resources-and-Acknowledgments"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Resources and Acknowledgments</span></h3><ul>
+<li><span>LMIC library documentation: </span><a href="https://github.com/mcci-catena/arduino-lmic" target="_blank" rel="noopener"><span>https://github.com/mcci-catena/arduino-lmic</span></a></li>
+<li><span>Azure IoT Hub documentation: </span><a href="https://docs.microsoft.com/en-us/azure/iot-hub/" target="_blank" rel="noopener"><span>https://docs.microsoft.com/en-us/azure/iot-hub/</span></a></li>
+<li><span>Stack Overflow for troubleshooting Arduino and LMIC integration issues.</span></li>
+</ul><h3 id="Troubleshooting" data-id="Troubleshooting"><a class="anchor hidden-xs" href="#Troubleshooting" title="Troubleshooting"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Troubleshooting</span></h3><ul>
+<li><strong><span>Issue:</span></strong><span> Encountered errors during packet transmission using LMIC due to mismatched frequencies.</span>
+<ul>
+<li><strong><span>Solution:</span></strong><span> Configured the correct frequency band for the region.</span></li>
+</ul>
+</li>
+<li><strong><span>Issue:</span></strong><span> Gateway refused to parse the incoming packet due to incorrect JSON format.</span>
+<ul>
+<li><strong><span>Solution:</span></strong><span> Adjusted packet structure to ensure valid JSON before sending data.</span></li>
+</ul>
+</li>
+</ul><hr><h2 id="Results" data-id="Results"><a class="anchor hidden-xs" href="#Results" title="Results"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Results</span></h2><h3 id="Code-Snippets" data-id="Code-Snippets"><a class="anchor hidden-xs" href="#Code-Snippets" title="Code-Snippets"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Code Snippets</span></h3><p><span>Each function developed for this lab is explained below.</span></p><pre><code class="cpp hljs"><span class="token keyword">void</span> <span class="token function">tx</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> str<span class="token punctuation">,</span> osjobcb_t func<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">os_radio</span><span class="token punctuation">(</span>RADIO_RST<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Stop RX first</span>
+  <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token comment">// Wait a bit to ensure state change</span>
+  LMIC<span class="token punctuation">.</span>dataLen <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Sending message"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Load the string into the LMIC frame</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">*</span>str<span class="token punctuation">)</span>
+    LMIC<span class="token punctuation">.</span>frame<span class="token punctuation">[</span>LMIC<span class="token punctuation">.</span>dataLen<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">*</span>str<span class="token operator">++</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Set the function to call after transmission</span>
+  LMIC<span class="token punctuation">.</span>osjob<span class="token punctuation">.</span>func <span class="token operator">=</span> func<span class="token punctuation">;</span>
+
+  <span class="token comment">// Start the transmission</span>
+  <span class="token function">os_radio</span><span class="token punctuation">(</span>RADIO_TX<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"TX"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h3 id="Explanation" data-id="Explanation"><a class="anchor hidden-xs" href="#Explanation" title="Explanation"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Explanation:</span></h3><p><span>This function handles the transmission of data via the LoRa network. It takes a string </span><code>str</code><span>, loads it into the LoRa module's frame buffer, and sends it. The function </span><code>func</code><span> is specified as a callback that gets executed after the transmission is complete.</span></p><hr><pre><code class="cpp hljs"><span class="token keyword">void</span> <span class="token function">rx</span><span class="token punctuation">(</span>osjobcb_t func<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  LMIC<span class="token punctuation">.</span>osjob<span class="token punctuation">.</span>func <span class="token operator">=</span> func<span class="token punctuation">;</span>
+  LMIC<span class="token punctuation">.</span>rxtime <span class="token operator">=</span> <span class="token function">os_getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Set the time for receiving</span>
+  <span class="token function">os_radio</span><span class="token punctuation">(</span>RADIO_RXON<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Enable continuous receive mode</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"RX"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h3 id="Explanation13" data-id="Explanation"><a class="anchor hidden-xs" href="#Explanation13" title="Explanation13"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Explanation:</span></h3><p><span>This function enables the receiver mode. It listens for incoming packets and calls the specified callback function </span><code>func</code><span> when a packet is received. It configures the LoRa module to receive without a timeout, making it continuous until a packet is received.</span></p><hr><pre><code class="cpp hljs"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">tx_func</span><span class="token punctuation">(</span>osjob_t<span class="token operator">*</span> job<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">float</span> temperature <span class="token operator">=</span> TempZero<span class="token punctuation">.</span><span class="token function">readInternalTemperature</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Read temperature</span>
+  storage<span class="token punctuation">[</span>tempCounter<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> temperature<span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>tempCounter <span class="token operator">&gt;=</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    tempCounter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>  <span class="token comment">// Rolling window for 5 temperature readings</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">float</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Sum up the temperatures</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>storage<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      sum <span class="token operator">+=</span> storage<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+      count<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// Calculate average temperature</span>
+  <span class="token keyword">float</span> average <span class="token operator">=</span> count <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token operator">?</span> sum <span class="token operator">/</span> count <span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Convert the average temperature to string</span>
+  <span class="token keyword">char</span> packetToSend<span class="token punctuation">[</span><span class="token number">256</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">char</span> avgStr<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token function">floatToStr</span><span class="token punctuation">(</span>avgStr<span class="token punctuation">,</span> average<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Prepare packet with node ID, counter, and average temperature</span>
+  <span class="token function">sprintf</span><span class="token punctuation">(</span>packetToSend<span class="token punctuation">,</span> <span class="token string">"Sender=%s,NodeID=%d,p=%d,Time=%lu,TempAvg=%s"</span><span class="token punctuation">,</span> name<span class="token punctuation">,</span> nodeID<span class="token punctuation">,</span> p<span class="token punctuation">,</span> <span class="token function">millis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> avgStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Send the packet</span>
+  <span class="token function">tx</span><span class="token punctuation">(</span>packetToSend<span class="token punctuation">,</span> txdone_func<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Reschedule the transmission after a random delay</span>
+  <span class="token function">os_setTimedCallback</span><span class="token punctuation">(</span>job<span class="token punctuation">,</span> <span class="token function">os_getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">ms2osticks</span><span class="token punctuation">(</span>TX_INTERVAL <span class="token operator">+</span> <span class="token function">random</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tx_func<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h3 id="Explanation14" data-id="Explanation"><a class="anchor hidden-xs" href="#Explanation14" title="Explanation14"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Explanation:</span></h3><p><span>This function reads the temperature from the sensor, stores it in a circular buffer, calculates the average of the last 5 readings, and transmits the data as a packet. The packet includes the node ID, a packet counter </span><code>p</code><span>, the time since the device started, and the average temperature. After transmission, it reschedules the job to run again after a random delay to avoid collisions with other transmissions.</span></p><hr><pre><code class="cpp hljs"><span class="token keyword">void</span> <span class="token function">startWDT</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  GCLK<span class="token operator">-&gt;</span>GENDIV<span class="token punctuation">.</span>reg <span class="token operator">=</span> <span class="token function">GCLK_GENDIV_ID</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token function">GCLK_GENDIV_DIV</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  GCLK<span class="token operator">-&gt;</span>GENCTRL<span class="token punctuation">.</span>reg <span class="token operator">=</span> <span class="token function">GCLK_GENCTRL_ID</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">|</span> GCLK_GENCTRL_GENEN <span class="token operator">|</span> GCLK_GENCTRL_SRC_OSCULP32K <span class="token operator">|</span> GCLK_GENCTRL_DIVSEL<span class="token punctuation">;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>GCLK<span class="token operator">-&gt;</span>STATUS<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>SYNCBUSY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  GCLK<span class="token operator">-&gt;</span>CLKCTRL<span class="token punctuation">.</span>reg <span class="token operator">=</span> GCLK_CLKCTRL_ID_WDT <span class="token operator">|</span> GCLK_CLKCTRL_CLKEN <span class="token operator">|</span> GCLK_CLKCTRL_GEN_GCLK2<span class="token punctuation">;</span>
+
+  WDT<span class="token operator">-&gt;</span>CTRL<span class="token punctuation">.</span>reg <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  WDT<span class="token operator">-&gt;</span>CONFIG<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>PER <span class="token operator">=</span> <span class="token number">0xB</span><span class="token punctuation">;</span>  <span class="token comment">// Set WDT period</span>
+  WDT<span class="token operator">-&gt;</span>EWCTRL<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>EWOFFSET <span class="token operator">=</span> <span class="token number">0xA</span><span class="token punctuation">;</span>  <span class="token comment">// Set early warning offset</span>
+  WDT<span class="token operator">-&gt;</span>INTENSET<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>EW <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>  <span class="token comment">// Enable WDT interrupt</span>
+  WDT<span class="token operator">-&gt;</span>CTRL<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>WEN <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>  <span class="token comment">// Watchdog timer enable</span>
+  <span class="token function">NVIC_EnableIRQ</span><span class="token punctuation">(</span>WDT_IRQn<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Enable WDT interrupt in the NVIC</span>
+  WDT<span class="token operator">-&gt;</span>CTRL<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>ENABLE <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>WDT<span class="token operator">-&gt;</span>STATUS<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>SYNCBUSY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h3 id="Explanation15" data-id="Explanation"><a class="anchor hidden-xs" href="#Explanation15" title="Explanation15"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Explanation:</span></h3><p><span>This function configures and starts the Watchdog Timer (WDT) on the SAMD21. The WDT is set to trigger a timeout if the system does not reset it within the configured period. It also configures an early warning interrupt to handle cases where the system may hang.</span></p><hr><pre><code class="cpp hljs"><span class="token keyword">void</span> <span class="token function">WDT_Handler</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>WDT<span class="token operator">-&gt;</span>INTFLAG<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>EW<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    WDT<span class="token operator">-&gt;</span>INTFLAG<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>EW <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>  <span class="token comment">// Clear the early warning flag</span>
+    SerialUSB<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"WDT triggered"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h3 id="Explanation16" data-id="Explanation"><a class="anchor hidden-xs" href="#Explanation16" title="Explanation16"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Explanation:</span></h3><p><span>This is the interrupt handler for the Watchdog Timer (WDT). When the WDT triggers its early warning interrupt, this function prints a message to indicate that the WDT was triggered.</span></p><p><span>These snippets cover the key functionalities of the code, such as LoRa transmission, reception, temperature handling, and the Watchdog Timer.</span></p><h3 id="Serial-Monitor-Outputs" data-id="Serial-Monitor-Outputs"><a class="anchor hidden-xs" href="#Serial-Monitor-Outputs" title="Serial-Monitor-Outputs"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Serial Monitor Outputs</span></h3><p><span>We captured the serial outputs from both the Sparkfun Pro RF device and the LoRa gateway. The outputs confirm successful packet transmission and reception:</span></p><h3 id="Screenshot-of-Device-Serial-Monitor-from-Leader-Node" data-id="Screenshot-of-Device-Serial-Monitor-from-Leader-Node"><a class="anchor hidden-xs" href="#Screenshot-of-Device-Serial-Monitor-from-Leader-Node" title="Screenshot-of-Device-Serial-Monitor-from-Leader-Node"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Screenshot of Device Serial Monitor from Leader Node</span></h3><p><img src="https://hackmd.io/_uploads/ByrQS5Vk1x.png" alt="serial_mon_final" class="offline-handled error-handled" loading="lazy"></p><h3 id="Screenshot-of-GATEWAY-Serial-Monitor-from-Leader-Node" data-id="Screenshot-of-GATEWAY-Serial-Monitor-from-Leader-Node"><a class="anchor hidden-xs" href="#Screenshot-of-GATEWAY-Serial-Monitor-from-Leader-Node" title="Screenshot-of-GATEWAY-Serial-Monitor-from-Leader-Node"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Screenshot of GATEWAY Serial Monitor from Leader Node</span></h3><p><img src="https://hackmd.io/_uploads/BJtINq4Jyx.png" alt="final_output" class="offline-handled error-handled" loading="lazy"></p><h3 id="Screenshot-of-Azure-Streaming-Analytics-from-Leader-Node" data-id="Screenshot-of-Azure-Streaming-Analytics-from-Leader-Node"><a class="anchor hidden-xs" href="#Screenshot-of-Azure-Streaming-Analytics-from-Leader-Node" title="Screenshot-of-Azure-Streaming-Analytics-from-Leader-Node"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Screenshot of Azure Streaming Analytics from Leader Node</span></h3><p><img src="https://hackmd.io/_uploads/BJz_HcE1Jx.png" alt="azure_final" class="offline-handled error-handled" loading="lazy"></p><h3 id="Azure-Cloud-Screenshots-and-JSON-File" data-id="Azure-Cloud-Screenshots-and-JSON-File"><a class="anchor hidden-xs" href="#Azure-Cloud-Screenshots-and-JSON-File" title="Azure-Cloud-Screenshots-and-JSON-File"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Azure Cloud Screenshots and JSON File</span></h3><p><span>The following screenshots show the successful upload of sensor data to the Azure cloud, including the JSON file download:</span></p><ul>
+<li><strong><span>Azure Portal - JSON File Download:</span></strong><br>
+<img src="https://hackmd.io/_uploads/HkIUUqN1ye.png" alt="json" class="offline-handled error-handled" loading="lazy"></li>
+</ul><hr><h2 id="Testing" data-id="Testing"><a class="anchor hidden-xs" href="#Testing" title="Testing"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Testing</span></h2><table>
+<thead>
+<tr>
+<th><strong><span>Test Step</span></strong></th>
+<th><strong><span>Expected Results</span></strong></th>
+<th><strong><span>Achieved Results</span></strong></th>
+<th><strong><span>Pass/Fail</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>1. Testing the LoRa Gateway (ESP32)</span></td>
+<td><span>Gateway powers up and connects to WiFi; logs successful registration with NU-IoT.</span></td>
+<td><span>Gateway powered on; connected to WiFi; logged registration.</span></td>
+<td><span>Pass</span></td>
+</tr>
+<tr>
+<td></td>
+<td><span>LoRa messages from end device are received.</span></td>
+<td><span>Messages were successfully received and logged.</span></td>
+<td><span>Pass</span></td>
+</tr>
+<tr>
+<td></td>
+<td><span>Gateway connects to Azure IoT Hub without issues.</span></td>
+<td><span>Successfully connected to Azure IoT Hub.</span></td>
+<td><span>Pass</span></td>
+</tr>
+<tr>
+<td><span>2. Testing Azure IoT Hub Configuration</span></td>
+<td><span>Test messages from end device are received at Azure IoT Hub.</span></td>
+<td><span>Test messages were received and logged correctly.</span></td>
+<td><span>Pass</span></td>
+</tr>
+<tr>
+<td></td>
+<td><span>Device registration shows active status in Azure.</span></td>
+<td><span>Device registered and shows active status.</span></td>
+<td><span>Pass</span></td>
+</tr>
+<tr>
+<td></td>
+<td><span>No errors in Azure logs related to device communication.</span></td>
+<td><span>No errors found in logs during testing.</span></td>
+<td><span>Pass</span></td>
+</tr>
+<tr>
+<td><span>3. Testing the End Device (SparkFun Pro RF)</span></td>
+<td><span>End device powers on and initializes correctly.</span></td>
+<td><span>Device powered on and initialized without issues.</span></td>
+<td><span>Pass</span></td>
+</tr>
+<tr>
+<td></td>
+<td><span>Data transmission is initiated and logged correctly.</span></td>
+<td><span>Data transmission was initiated and logged successfully.</span></td>
+<td><span>Pass</span></td>
+</tr>
+<tr>
+<td></td>
+<td><span>Test data sent is received at the Azure IoT Hub.</span></td>
+<td><span>Test data received and logged correctly at Azure.</span></td>
+<td><span>Pass</span></td>
+</tr>
+</tbody>
+</table><h2 id="Appendix" data-id="Appendix"><a class="anchor hidden-xs" href="#Appendix" title="Appendix"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Appendix</span></h2><h3 id="Entire-Arduino-Sketch" data-id="Entire-Arduino-Sketch"><a class="anchor hidden-xs" href="#Entire-Arduino-Sketch" title="Entire-Arduino-Sketch"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Entire Arduino Sketch</span></h3><pre><code class="cpp hljs">
+<span class="token comment">/*******************************************************************************
+     * Copyright (c) 2015 Matthijs Kooijman
+     * Copyright (c) 2018 Terry Moore, MCCI Corporation
+     *
+     * Permission is hereby granted, free of charge, to anyone
+     * obtaining a copy of this document and accompanying files,
+     * to do whatever they want with them without any restriction,
+     * including, but not limited to, copying, modification and redistribution.
+     * NO WARRANTY OF ANY KIND IS PROVIDED.
+     *
+     * This example transmits data on hardcoded channel and receives data
+     * when not transmitting. Running this sketch on two nodes should allow
+     * them to communicate.
+     *******************************************************************************/</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;lmic.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;hal/hal.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;SPI.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;TemperatureZero.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;FlashStorage.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;math.h&gt;</span>  <span class="token comment">// Ensure this is included for pow() function</span></span>
+
+
+
+<span class="token comment">// we formerly would check this configuration; but now there is a flag,</span>
+<span class="token comment">// in the LMIC, LMIC.noRXIQinversion;</span>
+<span class="token comment">// if we set that during init, we get the same effect.  If</span>
+<span class="token comment">// DISABLE_INVERT_IQ_ON_RX is defined, it means that LMIC.noRXIQinversion is</span>
+<span class="token comment">// treated as always set.</span>
+<span class="token comment">//</span>
+<span class="token comment">// #if !defined(DISABLE_INVERT_IQ_ON_RX)</span>
+<span class="token comment">// #error This example requires DISABLE_INVERT_IQ_ON_RX to be set. Update \
+    //        lmic_project_config.h in arduino-lmic/project_config to set it.</span>
+<span class="token comment">// #endif</span>
+
+<span class="token comment">// How often to send a packet. Note that this sketch bypasses the normal</span>
+<span class="token comment">// LMIC duty cycle limiting, so when you change anything in this sketch</span>
+<span class="token comment">// (payload length, frequency, spreading factor), be sure to check if</span>
+<span class="token comment">// this interval should not also be increased.</span>
+<span class="token comment">// See this spreadsheet for an easy airtime and duty cycle calculator:</span>
+<span class="token comment">// https://docs.google.com/spreadsheets/d/1voGAtQAjC1qBmaVuP1ApNKs1ekgUjavHuVQIXyYSvNc</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">TX_INTERVAL</span> <span class="token expression"><span class="token number">5000</span>  </span><span class="token comment">//Delay between each message in millidecond.</span></span>
+
+
+<span class="token comment">// Pin mapping for SAMD21</span>
+<span class="token keyword">const</span> lmic_pinmap lmic_pins <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">.</span>nss <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">,</span>  <span class="token comment">//RFM Chip Select</span>
+  <span class="token punctuation">.</span>rxtx <span class="token operator">=</span> LMIC_UNUSED_PIN<span class="token punctuation">,</span>
+  <span class="token punctuation">.</span>rst <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">,</span>              <span class="token comment">//RFM Reset</span>
+  <span class="token punctuation">.</span>dio <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">11</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>  <span class="token comment">//RFM Interrupt, RFM LoRa pin, RFM LoRa pin</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// These callbacks are only used in over-the-air activation, so they are</span>
+<span class="token comment">// left empty here (we cannot leave them out completely unless</span>
+<span class="token comment">// DISABLE_JOIN is set in arduino-lmoc/project_config/lmic_project_config.h,</span>
+<span class="token comment">// otherwise the linker will complain).</span>
+<span class="token keyword">void</span> <span class="token function">os_getArtEui</span><span class="token punctuation">(</span>u1_t<span class="token operator">*</span> buf<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">os_getDevEui</span><span class="token punctuation">(</span>u1_t<span class="token operator">*</span> buf<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">os_getDevKey</span><span class="token punctuation">(</span>u1_t<span class="token operator">*</span> buf<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">onEvent</span><span class="token punctuation">(</span>ev_t ev<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+
+osjob_t txjob<span class="token punctuation">;</span>
+osjob_t timeoutjob<span class="token punctuation">;</span>
+<span class="token keyword">int</span> p <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">tx_func</span><span class="token punctuation">(</span>osjob_t<span class="token operator">*</span> job<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Temperature related variables</span>
+TemperatureZero TempZero <span class="token operator">=</span> <span class="token function">TemperatureZero</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">FlashStorage</span><span class="token punctuation">(</span>storedCounter<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> tempCounter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> timeCounter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> nodeID <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>        <span class="token comment">//TODO: your node here</span>
+<span class="token keyword">char</span><span class="token operator">*</span> name <span class="token operator">=</span> <span class="token string">"Apala"</span><span class="token punctuation">;</span>  <span class="token comment">//TODO: your name here</span>
+<span class="token keyword">float</span> storage<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">floatToStr</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> buffer<span class="token punctuation">,</span> <span class="token keyword">float</span> value<span class="token punctuation">,</span> <span class="token keyword">int</span> precision <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">int</span> integerPart <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>value<span class="token punctuation">;</span>                                              <span class="token comment">// Extract integer part</span>
+  <span class="token keyword">int</span> decimalPart <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span>value <span class="token operator">-</span> integerPart<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> precision<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Extract decimal part</span>
+
+  <span class="token comment">// Format the string as integerPart.decimalPart</span>
+  <span class="token function">sprintf</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> <span class="token string">"%d.%02d"</span><span class="token punctuation">,</span> integerPart<span class="token punctuation">,</span> decimalPart<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// Transmit the given string and call the given function afterwards</span>
+<span class="token keyword">void</span> <span class="token function">tx</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> str<span class="token punctuation">,</span> osjobcb_t func<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">os_radio</span><span class="token punctuation">(</span>RADIO_RST<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Stop RX first</span>
+  <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token comment">// Wait a bit, without this os_radio below asserts, apparently because the state hasn't changed yet</span>
+  LMIC<span class="token punctuation">.</span>dataLen <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Sending message"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// SerialUSB.println(str);</span>
+
+  <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">*</span>str<span class="token punctuation">)</span>
+    LMIC<span class="token punctuation">.</span>frame<span class="token punctuation">[</span>LMIC<span class="token punctuation">.</span>dataLen<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">*</span>str<span class="token operator">++</span><span class="token punctuation">;</span>
+  LMIC<span class="token punctuation">.</span>osjob<span class="token punctuation">.</span>func <span class="token operator">=</span> func<span class="token punctuation">;</span>
+
+
+  <span class="token function">os_radio</span><span class="token punctuation">(</span>RADIO_TX<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"TX"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Enable rx mode and call func when a packet is received</span>
+<span class="token keyword">void</span> <span class="token function">rx</span><span class="token punctuation">(</span>osjobcb_t func<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  LMIC<span class="token punctuation">.</span>osjob<span class="token punctuation">.</span>func <span class="token operator">=</span> func<span class="token punctuation">;</span>
+  LMIC<span class="token punctuation">.</span>rxtime <span class="token operator">=</span> <span class="token function">os_getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// RX _now_</span>
+  <span class="token comment">// Enable "continuous" RX (e.g. without a timeout, still stops after</span>
+  <span class="token comment">// receiving a packet)</span>
+  <span class="token function">os_radio</span><span class="token punctuation">(</span>RADIO_RXON<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"RX"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">rxtimeout_func</span><span class="token punctuation">(</span>osjob_t<span class="token operator">*</span> job<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">digitalWrite</span><span class="token punctuation">(</span>LED_BUILTIN<span class="token punctuation">,</span> LOW<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// off</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">rx_func</span><span class="token punctuation">(</span>osjob_t<span class="token operator">*</span> job<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Blink once to confirm reception and then keep the led on</span>
+  <span class="token function">digitalWrite</span><span class="token punctuation">(</span>LED_BUILTIN<span class="token punctuation">,</span> LOW<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// off</span>
+  <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">digitalWrite</span><span class="token punctuation">(</span>LED_BUILTIN<span class="token punctuation">,</span> HIGH<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// on</span>
+
+  <span class="token comment">// Timeout RX (i.e. update led status) after 3 periods without RX</span>
+  <span class="token function">os_setTimedCallback</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>timeoutjob<span class="token punctuation">,</span> <span class="token function">os_getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">ms2osticks</span><span class="token punctuation">(</span><span class="token number">3</span> <span class="token operator">*</span> TX_INTERVAL<span class="token punctuation">)</span><span class="token punctuation">,</span> rxtimeout_func<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Reschedule TX so that it should not collide with the other side's</span>
+  <span class="token comment">// next TX</span>
+  <span class="token function">os_setTimedCallback</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>txjob<span class="token punctuation">,</span> <span class="token function">os_getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">ms2osticks</span><span class="token punctuation">(</span>TX_INTERVAL <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tx_func<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  SerialUSB<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Got "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>LMIC<span class="token punctuation">.</span>dataLen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">" bytes"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>LMIC<span class="token punctuation">.</span>frame<span class="token punctuation">,</span> LMIC<span class="token punctuation">.</span>dataLen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Restart RX</span>
+  <span class="token function">rx</span><span class="token punctuation">(</span>rx_func<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">txdone_func</span><span class="token punctuation">(</span>osjob_t<span class="token operator">*</span> job<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">//kick WDT</span>
+  WDT<span class="token operator">-&gt;</span>CLEAR<span class="token punctuation">.</span>reg <span class="token operator">=</span> WDT_CLEAR_CLEAR_KEY<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">tx_func</span><span class="token punctuation">(</span>osjob_t<span class="token operator">*</span> job<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Read temperature from sensor</span>
+  <span class="token keyword">float</span> temperature <span class="token operator">=</span> TempZero<span class="token punctuation">.</span><span class="token function">readInternalTemperature</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Debug: Print the current temperature reading</span>
+  <span class="token comment">// SerialUSB.print("Current Temperature: ");</span>
+  <span class="token comment">// SerialUSB.println(temperature);</span>
+
+  <span class="token comment">// Store temperature in the array</span>
+  storage<span class="token punctuation">[</span>tempCounter<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> temperature<span class="token punctuation">;</span>
+
+  <span class="token comment">// Reset tempCounter to 0 when it reaches 5, creating a rolling window of 5 values</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>tempCounter <span class="token operator">&gt;=</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    tempCounter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// Calculate the sum and average of the current temperatures in the storage array</span>
+  <span class="token keyword">float</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Debug: Print the stored values in the array</span>
+  <span class="token comment">// SerialUSB.print("Stored Temperatures: ");</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// SerialUSB.print(storage[i]);</span>
+    <span class="token comment">// SerialUSB.print(" ");</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>storage<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token comment">// Only sum up valid temperatures</span>
+      sum <span class="token operator">+=</span> storage<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+      count<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Newline for readability</span>
+
+  <span class="token comment">// Calculate average only if we have valid values</span>
+  <span class="token keyword">float</span> average <span class="token operator">=</span> count <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token operator">?</span> sum <span class="token operator">/</span> count <span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Debug: Print the calculated average</span>
+  <span class="token comment">// SerialUSB.print("Calculated Average: ");</span>
+  <span class="token comment">// SerialUSB.println(average);</span>
+
+  <span class="token comment">// Ensure the buffer is large enough</span>
+  <span class="token keyword">char</span> packetToSend<span class="token punctuation">[</span><span class="token number">256</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment">// Increased size to prevent overflow</span>
+
+  <span class="token comment">// Convert the average float value to a string manually</span>
+  <span class="token keyword">char</span> avgStr<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>              <span class="token comment">// Buffer to hold the formatted average as a string</span>
+  <span class="token function">floatToStr</span><span class="token punctuation">(</span>avgStr<span class="token punctuation">,</span> average<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Convert float to string</span>
+
+  <span class="token comment">// Increment the packet counter</span>
+  p<span class="token operator">++</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Concatenate the packet counter value to the message</span>
+  <span class="token function">sprintf</span><span class="token punctuation">(</span>packetToSend<span class="token punctuation">,</span> <span class="token string">"Sender=%s,NodeID=%d,p=%d,Time=%lu,TempAvg=%s"</span><span class="token punctuation">,</span> name<span class="token punctuation">,</span> nodeID<span class="token punctuation">,</span> p<span class="token punctuation">,</span> <span class="token function">millis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> avgStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Debug: Print the packet to be sent</span>
+  <span class="token comment">// SerialUSB.print("Packet to send: ");</span>
+  <span class="token comment">// SerialUSB.println(packetToSend);</span>
+
+  <span class="token comment">// Send the packet</span>
+  <span class="token function">tx</span><span class="token punctuation">(</span>packetToSend<span class="token punctuation">,</span> txdone_func<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Reschedule job every TX_INTERVAL (plus a bit of random to prevent systematic collisions)</span>
+  <span class="token function">os_setTimedCallback</span><span class="token punctuation">(</span>job<span class="token punctuation">,</span> <span class="token function">os_getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">ms2osticks</span><span class="token punctuation">(</span>TX_INTERVAL <span class="token operator">+</span> <span class="token function">random</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tx_func<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">void</span> <span class="token function">startWDT</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  GCLK<span class="token operator">-&gt;</span>GENDIV<span class="token punctuation">.</span>reg <span class="token operator">=</span> <span class="token function">GCLK_GENDIV_ID</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token function">GCLK_GENDIV_DIV</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  GCLK<span class="token operator">-&gt;</span>GENCTRL<span class="token punctuation">.</span>reg <span class="token operator">=</span> <span class="token function">GCLK_GENCTRL_ID</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">|</span> GCLK_GENCTRL_GENEN <span class="token operator">|</span> GCLK_GENCTRL_SRC_OSCULP32K <span class="token operator">|</span> GCLK_GENCTRL_DIVSEL<span class="token punctuation">;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>GCLK<span class="token operator">-&gt;</span>STATUS<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>SYNCBUSY<span class="token punctuation">)</span>
+    <span class="token punctuation">;</span>
+  GCLK<span class="token operator">-&gt;</span>CLKCTRL<span class="token punctuation">.</span>reg <span class="token operator">=</span> GCLK_CLKCTRL_ID_WDT <span class="token operator">|</span> GCLK_CLKCTRL_CLKEN <span class="token operator">|</span> GCLK_CLKCTRL_GEN_GCLK2<span class="token punctuation">;</span>
+
+
+  WDT<span class="token operator">-&gt;</span>CTRL<span class="token punctuation">.</span>reg <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  WDT<span class="token operator">-&gt;</span>CONFIG<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>PER <span class="token operator">=</span> <span class="token number">0xB</span><span class="token punctuation">;</span>
+  WDT<span class="token operator">-&gt;</span>EWCTRL<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>EWOFFSET <span class="token operator">=</span> <span class="token number">0xA</span><span class="token punctuation">;</span>
+  WDT<span class="token operator">-&gt;</span>INTENSET<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>EW <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  WDT<span class="token operator">-&gt;</span>CTRL<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>WEN <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token function">NVIC_EnableIRQ</span><span class="token punctuation">(</span>WDT_IRQn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  WDT<span class="token operator">-&gt;</span>CTRL<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>ENABLE <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>WDT<span class="token operator">-&gt;</span>STATUS<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>SYNCBUSY<span class="token punctuation">)</span>
+    <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">WDT_Handler</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>WDT<span class="token operator">-&gt;</span>INTFLAG<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>EW<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    WDT<span class="token operator">-&gt;</span>INTFLAG<span class="token punctuation">.</span>bit<span class="token punctuation">.</span>EW <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    SerialUSB<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"WDT triggered"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// logErrorInFlash(ERROR_CODE_WDT);</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token comment">// application entry point</span>
+<span class="token keyword">void</span> <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token number">115200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//while(!SerialUSB);</span>
+  <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">5000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Starting"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//  #ifdef VCC_ENABLE</span>
+  <span class="token comment">//  // For Pinoccio Scout boards</span>
+  <span class="token comment">//  pinMode(VCC_ENABLE, OUTPUT);</span>
+  <span class="token comment">//  digitalWrite(VCC_ENABLE, HIGH);</span>
+  <span class="token comment">//  delay(1000);</span>
+  <span class="token comment">//  #endif</span>
+
+  <span class="token function">pinMode</span><span class="token punctuation">(</span>LED_BUILTIN<span class="token punctuation">,</span> OUTPUT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Initialize temp sensor</span>
+  TempZero<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//setup WDT</span>
+  <span class="token function">startWDT</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// initialize runtime env</span>
+  <span class="token function">os_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// lmic reset values</span>
+  <span class="token function">LMIC_reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// this is automatically set to the proper bandwidth in kHz,</span>
+  <span class="token comment">// based on the selected channel.</span>
+  <span class="token keyword">uint32_t</span> uBandwidth<span class="token punctuation">;</span>
+  <span class="token comment">//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+  LMIC<span class="token punctuation">.</span>freq <span class="token operator">=</span> <span class="token number">902900000</span><span class="token punctuation">;</span>  <span class="token comment">//change this for assigned frequencies, match with int freq in loraModem.h</span>
+  <span class="token comment">//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+  uBandwidth <span class="token operator">=</span> <span class="token number">125</span><span class="token punctuation">;</span>
+  LMIC<span class="token punctuation">.</span>datarate <span class="token operator">=</span> US915_DR_SF7<span class="token punctuation">;</span>  <span class="token comment">// DR4</span>
+  LMIC<span class="token punctuation">.</span>txpow <span class="token operator">=</span> <span class="token number">21</span><span class="token punctuation">;</span>
+
+
+  <span class="token comment">// disable RX IQ inversion</span>
+  LMIC<span class="token punctuation">.</span>noRXIQinversion <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// This sets CR 4/5, BW125 (except for EU/AS923 DR_SF7B, which uses BW250)</span>
+  LMIC<span class="token punctuation">.</span>rps <span class="token operator">=</span> <span class="token function">updr2rps</span><span class="token punctuation">(</span>LMIC<span class="token punctuation">.</span>datarate<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  SerialUSB<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Frequency: "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>LMIC<span class="token punctuation">.</span>freq <span class="token operator">/</span> <span class="token number">1000000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">(</span>LMIC<span class="token punctuation">.</span>freq <span class="token operator">/</span> <span class="token number">100000</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"MHz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"  LMIC.datarate: "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>LMIC<span class="token punctuation">.</span>datarate<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"  LMIC.txpow: "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>LMIC<span class="token punctuation">.</span>txpow<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// This sets CR 4/5, BW125 (except for DR_SF7B, which uses BW250)</span>
+  LMIC<span class="token punctuation">.</span>rps <span class="token operator">=</span> <span class="token function">updr2rps</span><span class="token punctuation">(</span>LMIC<span class="token punctuation">.</span>datarate<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// disable RX IQ inversion</span>
+  LMIC<span class="token punctuation">.</span>noRXIQinversion <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+
+  SerialUSB<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Started"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  SerialUSB<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// setup initial job</span>
+  <span class="token function">os_setCallback</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>txjob<span class="token punctuation">,</span> tx_func<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">loop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// execute scheduled jobs and events</span>
+  <span class="token function">os_runloop_once</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#CSCE-838-Internet-Of-Things-Lab-4-Report" title="CSCE 838 Internet Of Things Lab 4 Report">CSCE 838 Internet Of Things Lab 4 Report</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li class=""><a href="#Group-Members" title="Group Members:">Group Members:</a></li>
+</ul>
+</li>
+<li class=""><a href="#Table-of-Contents" title="Table of Contents">Table of Contents</a></li>
+<li class=""><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li class=""><a href="#Development-Process" title="Development Process">Development Process</a><ul class="nav">
+<li class=""><a href="#Setting-up-IoT-Hub" title="Setting up IoT Hub">Setting up IoT Hub</a></li>
+<li class=""><a href="#Merging-LMIC-Example-with-Previous-Lab-Code" title="Merging LMIC Example with Previous Lab Code">Merging LMIC Example with Previous Lab Code</a></li>
+<li class=""><a href="#Packet-Structure-and-Gateway-Setup" title="Packet Structure and Gateway Setup">Packet Structure and Gateway Setup</a></li>
+<li><a href="#Resources-and-Acknowledgments" title="Resources and Acknowledgments">Resources and Acknowledgments</a></li>
+<li><a href="#Troubleshooting" title="Troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li><a href="#Results" title="Results">Results</a><ul class="nav">
+<li><a href="#Code-Snippets" title="Code Snippets">Code Snippets</a></li>
+<li><a href="#Explanation" title="Explanation:">Explanation:</a></li>
+<li><a href="#Explanation13" title="Explanation:">Explanation:</a></li>
+<li><a href="#Explanation14" title="Explanation:">Explanation:</a></li>
+<li><a href="#Explanation15" title="Explanation:">Explanation:</a></li>
+<li><a href="#Explanation16" title="Explanation:">Explanation:</a></li>
+<li><a href="#Serial-Monitor-Outputs" title="Serial Monitor Outputs">Serial Monitor Outputs</a></li>
+<li><a href="#Screenshot-of-Device-Serial-Monitor-from-Leader-Node" title="Screenshot of Device Serial Monitor from Leader Node">Screenshot of Device Serial Monitor from Leader Node</a></li>
+<li><a href="#Screenshot-of-GATEWAY-Serial-Monitor-from-Leader-Node" title="Screenshot of GATEWAY Serial Monitor from Leader Node">Screenshot of GATEWAY Serial Monitor from Leader Node</a></li>
+<li><a href="#Screenshot-of-Azure-Streaming-Analytics-from-Leader-Node" title="Screenshot of Azure Streaming Analytics from Leader Node">Screenshot of Azure Streaming Analytics from Leader Node</a></li>
+<li><a href="#Azure-Cloud-Screenshots-and-JSON-File" title="Azure Cloud Screenshots and JSON File">Azure Cloud Screenshots and JSON File</a></li>
+</ul>
+</li>
+<li><a href="#Testing" title="Testing">Testing</a></li>
+<li class=""><a href="#Appendix" title="Appendix">Appendix</a><ul class="nav">
+<li class=""><a href="#Entire-Arduino-Sketch" title="Entire Arduino Sketch">Entire Arduino Sketch</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#CSCE-838-Internet-Of-Things-Lab-4-Report" title="CSCE 838 Internet Of Things Lab 4 Report">CSCE 838 Internet Of Things Lab 4 Report</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li class=""><a href="#Group-Members" title="Group Members:">Group Members:</a></li>
+</ul>
+</li>
+<li class=""><a href="#Table-of-Contents" title="Table of Contents">Table of Contents</a></li>
+<li class=""><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li class=""><a href="#Development-Process" title="Development Process">Development Process</a><ul class="nav">
+<li class=""><a href="#Setting-up-IoT-Hub" title="Setting up IoT Hub">Setting up IoT Hub</a></li>
+<li class=""><a href="#Merging-LMIC-Example-with-Previous-Lab-Code" title="Merging LMIC Example with Previous Lab Code">Merging LMIC Example with Previous Lab Code</a></li>
+<li class=""><a href="#Packet-Structure-and-Gateway-Setup" title="Packet Structure and Gateway Setup">Packet Structure and Gateway Setup</a></li>
+<li><a href="#Resources-and-Acknowledgments" title="Resources and Acknowledgments">Resources and Acknowledgments</a></li>
+<li><a href="#Troubleshooting" title="Troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li><a href="#Results" title="Results">Results</a><ul class="nav">
+<li><a href="#Code-Snippets" title="Code Snippets">Code Snippets</a></li>
+<li><a href="#Explanation" title="Explanation:">Explanation:</a></li>
+<li><a href="#Explanation13" title="Explanation:">Explanation:</a></li>
+<li><a href="#Explanation14" title="Explanation:">Explanation:</a></li>
+<li><a href="#Explanation15" title="Explanation:">Explanation:</a></li>
+<li><a href="#Explanation16" title="Explanation:">Explanation:</a></li>
+<li><a href="#Serial-Monitor-Outputs" title="Serial Monitor Outputs">Serial Monitor Outputs</a></li>
+<li><a href="#Screenshot-of-Device-Serial-Monitor-from-Leader-Node" title="Screenshot of Device Serial Monitor from Leader Node">Screenshot of Device Serial Monitor from Leader Node</a></li>
+<li><a href="#Screenshot-of-GATEWAY-Serial-Monitor-from-Leader-Node" title="Screenshot of GATEWAY Serial Monitor from Leader Node">Screenshot of GATEWAY Serial Monitor from Leader Node</a></li>
+<li><a href="#Screenshot-of-Azure-Streaming-Analytics-from-Leader-Node" title="Screenshot of Azure Streaming Analytics from Leader Node">Screenshot of Azure Streaming Analytics from Leader Node</a></li>
+<li><a href="#Azure-Cloud-Screenshots-and-JSON-File" title="Azure Cloud Screenshots and JSON File">Azure Cloud Screenshots and JSON File</a></li>
+</ul>
+</li>
+<li><a href="#Testing" title="Testing">Testing</a></li>
+<li class=""><a href="#Appendix" title="Appendix">Appendix</a><ul class="nav">
+<li class=""><a href="#Entire-Arduino-Sketch" title="Entire Arduino Sketch">Entire Arduino Sketch</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
